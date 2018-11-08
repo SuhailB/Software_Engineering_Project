@@ -16,6 +16,7 @@ public class Configuration extends AppCompatActivity {
     private Button button;
     private static final String TAG = "ConfigActivity";
 
+    //this is Yvan branch
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
