@@ -51,6 +51,7 @@ public class MapsActivity
         GoogleMap.OnMyLocationClickListener
     {
 
+        //This is Suhail branch
     private GoogleMap mMap;
     private List<Polygon> ReservedLots;
     private String TAG = "MapsActivity";
