@@ -15,8 +15,8 @@ public class Configuration extends AppCompatActivity {
 
     private Button button;
     private static final String TAG = "ConfigActivity";
-
-
+	
+	//hey its me again whats up
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
