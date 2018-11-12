@@ -2,6 +2,7 @@ package com.example.sebasala.parkingmap;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
@@ -52,8 +53,18 @@ public class MapsActivity
     {
 
     private GoogleMap mMap;
+
+    //arrays of objects created
     private List<Polygon> ReservedLots;
+    private List<Polygon> ResidentLots;
+    private List<Polygon> FacultyLots;
+    private List<Polygon> StudentsLots;
+
     private String TAG = "MapsActivity";
+
+    //integer used in identifying the
+    //button that was pressed
+    private static int buttonId = 0;
 
     private static final int COLOR_BLACK_ARGB = 0xff000000;
     private static final int COLOR_WHITE_ARGB = 0xffffffff;
@@ -61,9 +72,10 @@ public class MapsActivity
     private static final int COLOR_PURPLE_ARGB = 0xff81C784;
     private static final int COLOR_ORANGE_ARGB = 0xffF57F17;
     private static final int COLOR_BLUE_ARGB = 0xff0a9eee;
+    private static final int COLOR_RED_ARGB = 0xffff0000;
 
     private static final int POLYLINE_STROKE_WIDTH_PX = 12;
-    private static final int POLYGON_STROKE_WIDTH_PX = 0;
+    private static final int POLYGON_STROKE_WIDTH_PX = 2;
     private static final int PATTERN_DASH_LENGTH_PX = 20;
     private static final int PATTERN_GAP_LENGTH_PX = 20;
     private static final PatternItem DOT = new Dot();
@@ -92,6 +104,11 @@ public class MapsActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_maps);
+
+        //the two lines get the ID for button clicked
+        Intent intent = getIntent();
+        buttonId = intent.getIntExtra(Configuration.EXTRA_NUMBER,0);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -104,6 +121,9 @@ public class MapsActivity
         mMap = googleMap;
         //array list to hold the polygon objects of reserved type
         ReservedLots = new ArrayList<Polygon>();
+        ResidentLots = new ArrayList<Polygon>();
+        StudentsLots = new ArrayList<Polygon>();
+        FacultyLots = new ArrayList<Polygon>();
 
         if (ContextCompat.checkSelfPermission(this, FINE_LOCATION  ) != PackageManager.PERMISSION_GRANTED
         ||  ContextCompat.checkSelfPermission(this, COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
@@ -119,28 +139,619 @@ public class MapsActivity
 
 
         }
+
+
+        switch (buttonId)
+        {
+            case 0: //shows everything
+                addFacultyStaffLotsPolygons();
+                addResidentReservedLotsPolygons();
+                addStudentLotsPolygons();
+                addReservedLotsPolygons();
+                break;
+            case 1: //show faculty/staff or yellow parking places
+                addFacultyStaffLotsPolygons();
+                break;
+            case 2: //show residents reserved or red parking places
+                addResidentReservedLotsPolygons();
+                break;
+            case 3: //show student or green
+                addStudentLotsPolygons();
+                break;
+            case 4: //show reserved or blue
+                addReservedLotsPolygons();
+                break;
+            default: //show everything
+                addFacultyStaffLotsPolygons();
+                addResidentReservedLotsPolygons();
+                addStudentLotsPolygons();
+                addReservedLotsPolygons();
+
+        }
         // Add polylines and polygons to the map. This section shows just
         // a single polyline. Read the rest of the tutorial to learn more.
-        addReservedLotsPolygons();
+        //addReservedLotsPolygons();
         // Position the map's camera near Alice Springs in the center of Australia,
         // and set the zoom factor so most of Australia shows on the screen.
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-23.684, 133.903), 4));
 
         // Set listeners for click events.
+        // Add a marker in UARK and move the camera
+        LatLng UARK = new LatLng(36.0685126, -94.1729845);
+       // mMap.addMarker(new MarkerOptions().position(UARK).title("Univeristy of Arkansas"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UARK, 15));
+        mMap.setMyLocationEnabled(true);
+        mMap.setOnMyLocationButtonClickListener(this);
+        mMap.setOnMyLocationClickListener(this);
+        mMap.setOnPolygonClickListener(this);
+
+
+    }
+
+    public void addFacultyStaffLotsPolygons()
+    {
+        //add Faculty staff lots here
+    }
+
+    public void addStudentLotsPolygons()
+    {
+        //addStudent lots here
+    }
+
+    public void addResidentReservedLotsPolygons()
+    {
+
+        Polygon polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.066262 ,-94.176511),
+                        new LatLng(36.066318 ,-94.176521),
+                        new LatLng(36.066505 ,-94.176548),
+                        new LatLng(36.066499 ,-94.176598),
+                        new LatLng(36.066304 ,-94.176574),
+                        new LatLng(36.066256471131638 ,-94.176567210161664),
+                        new LatLng(36.066255 ,-94.176567),
+                        new LatLng(36.066256471131638 ,-94.176567210161664),
+                        new LatLng(36.066256 ,-94.176572),
+                        new LatLng(36.066255 ,-94.176567)));
+        polygonResident.setTag("Lot38");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
 
 
 
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.067212 ,-94.176825),
+                        new LatLng(36.067209 ,-94.176749),
+                        new LatLng(36.067044 ,-94.176736),
+                        new LatLng(36.067044 ,-94.176803),
+                        new LatLng(36.067212 ,-94.176825)));
+        polygonResident.setTag("Lot37");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
 
-            // Add a marker in Sydney and move the camera
-            LatLng UARK = new LatLng(36.0685126, -94.1729845);
-           // mMap.addMarker(new MarkerOptions().position(UARK).title("Univeristy of Arkansas"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UARK, 15));
-            mMap.setMyLocationEnabled(true);
-            mMap.setOnMyLocationButtonClickListener(this);
-            mMap.setOnMyLocationClickListener(this);
-            mMap.setOnPolygonClickListener(this);
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.06355 ,-94.175442),
+                        new LatLng(36.063337 ,-94.175252),
+                        new LatLng(36.063428 ,-94.175106),
+                        new LatLng(36.063662 ,-94.175317),
+                        new LatLng(36.06364 ,-94.175358),
+                        new LatLng(36.0636 ,-94.175325),
+                        new LatLng(36.06355 ,-94.175442)));
+        polygonResident.setTag("Lot29");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
 
 
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.071456 ,-94.175367),
+                        new LatLng(36.071692 ,-94.175358),
+                        new LatLng(36.071691 ,-94.175302),
+                        new LatLng(36.071453 ,-94.175304),
+                        new LatLng(36.071456 ,-94.175367)));
+        polygonResident.setTag("Lot55");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.07258 ,-94.178745),
+                        new LatLng(36.072231 ,-94.178766),
+                        new LatLng(36.072232 ,-94.178821),
+                        new LatLng(36.07258 ,-94.178803),
+                        new LatLng(36.07258 ,-94.178745)));
+        polygonResident.setTag("Lot82");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.064329 ,-94.175842),
+                        new LatLng(36.064289 ,-94.175885),
+                        new LatLng(36.064263 ,-94.175954),
+                        new LatLng(36.064275 ,-94.176021),
+                        new LatLng(36.064114 ,-94.175946),
+                        new LatLng(36.064104 ,-94.175879),
+                        new LatLng(36.064204 ,-94.175864),
+                        new LatLng(36.064248 ,-94.175825),
+                        new LatLng(36.064329 ,-94.175842)));
+        polygonResident.setTag("Lot30");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.064377 ,-94.176457),
+                        new LatLng(36.064412 ,-94.176387),
+                        new LatLng(36.064403 ,-94.176269),
+                        new LatLng(36.063965 ,-94.176052),
+                        new LatLng(36.063896 ,-94.176218),
+                        new LatLng(36.064362 ,-94.176452),
+                        new LatLng(36.064377 ,-94.176457)));
+        polygonResident.setTag("Lot31");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.06705 ,-94.175462),
+                        new LatLng(36.067103 ,-94.175466),
+                        new LatLng(36.067101 ,-94.175371),
+                        new LatLng(36.06705 ,-94.175368),
+                        new LatLng(36.06705 ,-94.175462)));
+        polygonResident.setTag("Lot42");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.062317 ,-94.177451),
+                        new LatLng(36.062424 ,-94.177428),
+                        new LatLng(36.062469 ,-94.17732),
+                        new LatLng(36.062825 ,-94.177529),
+                        new LatLng(36.062872 ,-94.177401),
+                        new LatLng(36.063264 ,-94.177644),
+                        new LatLng(36.063147 ,-94.177966),
+                        new LatLng(36.063028 ,-94.178005),
+                        new LatLng(36.063018 ,-94.178056),
+                        new LatLng(36.062688 ,-94.178062),
+                        new LatLng(36.062682 ,-94.177991),
+                        new LatLng(36.062641 ,-94.178069),
+                        new LatLng(36.062471 ,-94.177965),
+                        new LatLng(36.062492 ,-94.177902),
+                        new LatLng(36.062452 ,-94.177833),
+                        new LatLng(36.06242 ,-94.17784),
+                        new LatLng(36.062317 ,-94.177451)));
+        polygonResident.setTag("Lot22");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.061752 ,-94.175657),
+                        new LatLng(36.06101 ,-94.175666),
+                        new LatLng(36.061005 ,-94.175603),
+                        new LatLng(36.061767 ,-94.175596),
+                        new LatLng(36.061769 ,-94.175657),
+                        new LatLng(36.061752 ,-94.175657)));
+        polygonResident.setTag("Lot26");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.066136 ,-94.176633),
+                        new LatLng(36.066274 ,-94.176645),
+                        new LatLng(36.066434 ,-94.17666),
+                        new LatLng(36.066428 ,-94.176747),
+                        new LatLng(36.066261 ,-94.176718),
+                        new LatLng(36.06614 ,-94.176704),
+                        new LatLng(36.066136 ,-94.176633)));
+        polygonResident.setTag("Lot38");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.066897 ,-94.176706),
+                        new LatLng(36.066697 ,-94.176711),
+                        new LatLng(36.066697 ,-94.176784),
+                        new LatLng(36.066899 ,-94.176779),
+                        new LatLng(36.066897 ,-94.176706)));
+        polygonResident.setTag("Lot37");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.063881 ,-94.176162),
+                        new LatLng(36.063699 ,-94.175901),
+                        new LatLng(36.063617 ,-94.176027),
+                        new LatLng(36.063823 ,-94.17629),
+                        new LatLng(36.063881 ,-94.176162)));
+        polygonResident.setTag("Lot96");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.063161 ,-94.175824),
+                        new LatLng(36.063311 ,-94.175812),
+                        new LatLng(36.063691 ,-94.176308),
+                        new LatLng(36.063805 ,-94.176324),
+                        new LatLng(36.063728 ,-94.176527),
+                        new LatLng(36.063158 ,-94.175835),
+                        new LatLng(36.063161 ,-94.175824)));
+        polygonResident.setTag("Lot96");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.071503 ,-94.175173),
+                        new LatLng(36.071627 ,-94.17517),
+                        new LatLng(36.071628 ,-94.175231),
+                        new LatLng(36.071505 ,-94.175236),
+                        new LatLng(36.071503 ,-94.175173)));
+        polygonResident.setTag("Lot55");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.070603 ,-94.168998),
+                        new LatLng(36.070763 ,-94.168985),
+                        new LatLng(36.07077 ,-94.16947),
+                        new LatLng(36.07072 ,-94.16947),
+                        new LatLng(36.070722 ,-94.16951),
+                        new LatLng(36.070689 ,-94.169566),
+                        new LatLng(36.070613 ,-94.169584),
+                        new LatLng(36.070366 ,-94.169597),
+                        new LatLng(36.070367 ,-94.169554),
+                        new LatLng(36.070623 ,-94.169536),
+                        new LatLng(36.070603 ,-94.168998),
+                        new LatLng(36.070603 ,-94.168998),
+                        new LatLng(36.070603 ,-94.168998),
+                        new LatLng(36.070603 ,-94.168998)));
+        polygonResident.setTag("Lot98");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.07284 ,-94.175838),
+                        new LatLng(36.073828 ,-94.175808),
+                        new LatLng(36.073839 ,-94.176148),
+                        new LatLng(36.073722 ,-94.176159),
+                        new LatLng(36.073724 ,-94.176216),
+                        new LatLng(36.072841 ,-94.17625),
+                        new LatLng(36.072837 ,-94.175848),
+                        new LatLng(36.07284 ,-94.175838)));
+        polygonResident.setTag("Lot81");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.073594 ,-94.17975),
+                        new LatLng(36.07359 ,-94.179389),
+                        new LatLng(36.073634 ,-94.179392),
+                        new LatLng(36.07363 ,-94.179073),
+                        new LatLng(36.073745 ,-94.179071),
+                        new LatLng(36.073746 ,-94.178986),
+                        new LatLng(36.073909 ,-94.178988),
+                        new LatLng(36.073918 ,-94.179758),
+                        new LatLng(36.073596 ,-94.179765),
+                        new LatLng(36.073594 ,-94.17975)));
+        polygonResident.setTag("Lot79");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.07363 ,-94.179137),
+                        new LatLng(36.073632 ,-94.179165),
+                        new LatLng(36.073584 ,-94.179167),
+                        new LatLng(36.073582 ,-94.179133),
+                        new LatLng(36.07363 ,-94.179137)));
+        polygonResident.setTag("Lot79");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.066506 ,-94.176545),
+                        new LatLng(36.066281 ,-94.176508),
+                        new LatLng(36.066133 ,-94.176451),
+                        new LatLng(36.065953 ,-94.176402),
+                        new LatLng(36.065946 ,-94.176463),
+                        new LatLng(36.066275 ,-94.176567),
+                        new LatLng(36.0665 ,-94.176607),
+                        new LatLng(36.066506 ,-94.176545)));
+        polygonResident.setTag("Lot39");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.06721 ,-94.175418),
+                        new LatLng(36.067207 ,-94.17514),
+                        new LatLng(36.067155 ,-94.17514),
+                        new LatLng(36.067156 ,-94.175415),
+                        new LatLng(36.06721 ,-94.175418)));
+        polygonResident.setTag("Lot42");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.073196 ,-94.176986),
+                        new LatLng(36.073199 ,-94.17658),
+                        new LatLng(36.073893 ,-94.17657),
+                        new LatLng(36.073897 ,-94.177374),
+                        new LatLng(36.073906 ,-94.17738),
+                        new LatLng(36.073323 ,-94.177385),
+                        new LatLng(36.073319 ,-94.17698),
+                        new LatLng(36.073196 ,-94.176986)));
+        polygonResident.setTag("Lot80");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.074079 ,-94.177414),
+                        new LatLng(36.074966 ,-94.177374),
+                        new LatLng(36.074988 ,-94.177366),
+                        new LatLng(36.075005 ,-94.178211),
+                        new LatLng(36.074084 ,-94.178203),
+                        new LatLng(36.074079 ,-94.177414),
+                        new LatLng(36.074079 ,-94.177414)));
+        polygonResident.setTag("Lot105");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.072727 ,-94.175884),
+                        new LatLng(36.072771 ,-94.175884),
+                        new LatLng(36.072774 ,-94.176142),
+                        new LatLng(36.072769 ,-94.176146),
+                        new LatLng(36.072734 ,-94.176142),
+                        new LatLng(36.072727 ,-94.175884)));
+        polygonResident.setTag("Lot81");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.066228 ,-94.175709),
+                        new LatLng(36.066219 ,-94.175905),
+                        new LatLng(36.066207 ,-94.176039),
+                        new LatLng(36.064985 ,-94.175883),
+                        new LatLng(36.065013 ,-94.175698),
+                        new LatLng(36.065264 ,-94.175709),
+                        new LatLng(36.065271 ,-94.175636),
+                        new LatLng(36.065628 ,-94.17562),
+                        new LatLng(36.066228 ,-94.175684),
+                        new LatLng(36.066228 ,-94.175709)));
+        polygonResident.setTag("Lot41");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.071321 ,-94.171582),
+                        new LatLng(36.071324 ,-94.171082),
+                        new LatLng(36.071704 ,-94.171071),
+                        new LatLng(36.071723 ,-94.17157),
+                        new LatLng(36.071716 ,-94.17157),
+                        new LatLng(36.071321 ,-94.171582),
+                        new LatLng(36.071321 ,-94.171582)));
+        polygonResident.setTag("Lot58");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.072342 ,-94.17339),
+                        new LatLng(36.07253 ,-94.173387),
+                        new LatLng(36.07255 ,-94.174186),
+                        new LatLng(36.072357 ,-94.174196),
+                        new LatLng(36.072344 ,-94.173402),
+                        new LatLng(36.072342 ,-94.17339),
+                        new LatLng(36.072342 ,-94.17339),
+                        new LatLng(36.072342 ,-94.17339)));
+        polygonResident.setTag("Lot129");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.065495 ,-94.177107),
+                        new LatLng(36.065502 ,-94.177042),
+                        new LatLng(36.065433 ,-94.177013),
+                        new LatLng(36.065452 ,-94.176824),
+                        new LatLng(36.065416 ,-94.176814),
+                        new LatLng(36.06542 ,-94.176765),
+                        new LatLng(36.065246 ,-94.17668),
+                        new LatLng(36.065227 ,-94.176726),
+                        new LatLng(36.06505 ,-94.176634),
+                        new LatLng(36.065003 ,-94.176719),
+                        new LatLng(36.064981 ,-94.176812),
+                        new LatLng(36.064985 ,-94.176892),
+                        new LatLng(36.065002 ,-94.176949),
+                        new LatLng(36.065021 ,-94.17698),
+                        new LatLng(36.065052 ,-94.176999),
+                        new LatLng(36.065093 ,-94.177015),
+                        new LatLng(36.065134 ,-94.177031),
+                        new LatLng(36.065181 ,-94.177039),
+                        new LatLng(36.065494 ,-94.17711),
+                        new LatLng(36.065495 ,-94.177107)));
+        polygonResident.setTag("Lot136");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.06375 ,-94.176722),
+                        new LatLng(36.064013 ,-94.176901),
+                        new LatLng(36.064021 ,-94.176879),
+                        new LatLng(36.063756 ,-94.1767),
+                        new LatLng(36.063748 ,-94.176724),
+                        new LatLng(36.06375 ,-94.176722)));
+        polygonResident.setTag("Lot140");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.064589 ,-94.177188),
+                        new LatLng(36.064664 ,-94.177205),
+                        new LatLng(36.064779 ,-94.177225),
+                        new LatLng(36.065127 ,-94.17726),
+                        new LatLng(36.06513 ,-94.177286),
+                        new LatLng(36.064769 ,-94.177251),
+                        new LatLng(36.064643 ,-94.177227),
+                        new LatLng(36.064584 ,-94.177211),
+                        new LatLng(36.064591 ,-94.177189),
+                        new LatLng(36.064589 ,-94.177188)));
+        polygonResident.setTag("Lot140");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.065364 ,-94.177279),
+                        new LatLng(36.065708 ,-94.177302),
+                        new LatLng(36.06611 ,-94.177326),
+                        new LatLng(36.066763 ,-94.177368),
+                        new LatLng(36.067155 ,-94.177384),
+                        new LatLng(36.067323 ,-94.177402),
+                        new LatLng(36.067508 ,-94.177429),
+                        new LatLng(36.067621 ,-94.177448),
+                        new LatLng(36.067725 ,-94.177478),
+                        new LatLng(36.06784 ,-94.177503),
+                        new LatLng(36.068007 ,-94.177547),
+                        new LatLng(36.068003 ,-94.177571),
+                        new LatLng(36.067831 ,-94.177528),
+                        new LatLng(36.067689 ,-94.177495),
+                        new LatLng(36.067551 ,-94.177465),
+                        new LatLng(36.067392 ,-94.177441),
+                        new LatLng(36.067233 ,-94.177421),
+                        new LatLng(36.067127 ,-94.177413),
+                        new LatLng(36.067046 ,-94.177408),
+                        new LatLng(36.066634 ,-94.17739),
+                        new LatLng(36.066169 ,-94.177358),
+                        new LatLng(36.065765 ,-94.177333),
+                        new LatLng(36.065547 ,-94.177323),
+                        new LatLng(36.065366 ,-94.177307),
+                        new LatLng(36.065364 ,-94.17728),
+                        new LatLng(36.065364 ,-94.177279)));
+        polygonResident.setTag("Lot140");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.064518 ,-94.175086),
+                        new LatLng(36.064534 ,-94.175631),
+                        new LatLng(36.065258 ,-94.175604),
+                        new LatLng(36.065251 ,-94.175223),
+                        new LatLng(36.064579 ,-94.175239),
+                        new LatLng(36.064573 ,-94.175092),
+                        new LatLng(36.064534 ,-94.175092),
+                        new LatLng(36.064518 ,-94.175086)));
+        polygonResident.setTag("Lot41");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.070387 ,-94.169655),
+                        new LatLng(36.070829 ,-94.169657),
+                        new LatLng(36.070829 ,-94.169729),
+                        new LatLng(36.070384 ,-94.169729),
+                        new LatLng(36.07038 ,-94.169651),
+                        new LatLng(36.070387 ,-94.169655)));
+        polygonResident.setTag("Lot160");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.070921 ,-94.172719),
+                        new LatLng(36.071035 ,-94.172708),
+                        new LatLng(36.071025 ,-94.172346),
+                        new LatLng(36.070914 ,-94.172346),
+                        new LatLng(36.070919 ,-94.172715),
+                        new LatLng(36.070921 ,-94.172719)));
+        polygonResident.setTag("Lot162");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.071777 ,-94.1697),
+                        new LatLng(36.071893 ,-94.169685),
+                        new LatLng(36.071949 ,-94.169645),
+                        new LatLng(36.072269 ,-94.169649),
+                        new LatLng(36.072291 ,-94.170047),
+                        new LatLng(36.07188 ,-94.170063),
+                        new LatLng(36.071869 ,-94.169908),
+                        new LatLng(36.071786 ,-94.169909),
+                        new LatLng(36.071778 ,-94.1697),
+                        new LatLng(36.071777 ,-94.1697)));
+        polygonResident.setTag("Lot61");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
+
+
+        polygonResident = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.071815 ,-94.1701),
+                        new LatLng(36.07228 ,-94.170089),
+                        new LatLng(36.072277 ,-94.170382),
+                        new LatLng(36.071796 ,-94.17039),
+                        new LatLng(36.071786 ,-94.17018),
+                        new LatLng(36.071814 ,-94.17017),
+                        new LatLng(36.071818 ,-94.170111),
+                        new LatLng(36.071815 ,-94.1701)));
+        polygonResident.setTag("Lot59");
+        stylePolygon(polygonResident, "Resident");
+        ResidentLots.add(polygonResident);
     }
 
     public void addReservedLotsPolygons()
@@ -1311,6 +1922,8 @@ public class MapsActivity
                 // Apply a stroke pattern to render a line of dots and dashes, and define colors.
                 fillColor = COLOR_BLUE_ARGB;
                 break;
+            case "Resident":
+                fillColor = COLOR_RED_ARGB;
         }
         polygon.setStrokeWidth(POLYGON_STROKE_WIDTH_PX);
         polygon.setFillColor(fillColor);

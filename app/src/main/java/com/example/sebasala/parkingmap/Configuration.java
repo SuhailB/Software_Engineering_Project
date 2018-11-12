@@ -13,10 +13,25 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 public class Configuration extends AppCompatActivity {
 
-    private Button button;
+    //Buttons associated with each parking pass
+    //private Button button;
+    private Button purpleButton ;
+    private Button blueButton;
+    private Button greenButton;
+    private Button redButton ;
+
+    //ID number for buttons
+    private final int  buttonIdPurple = 1;
+    private final int buttonIdRed = 2;
+    private final int buttonIdGreen = 3;
+    private final int buttonIdBlue = 4;
+
+    //used in sending the ID for the button clicked
+    //see openMaps() for more info
+    public static final String EXTRA_NUMBER = "com.example.application.ParkingMap.EXTRA_NUMBER";
+
     private static final String TAG = "ConfigActivity";
-	
-	//hey its me again whats up
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,15 +42,46 @@ public class Configuration extends AppCompatActivity {
 
     private void startApp()
     {
-        button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener()
+        //assign button object from buttons created in the XML file
+        //button = findViewById(R.id.button);
+        purpleButton = findViewById(R.id.purplePass);
+        blueButton = findViewById(R.id.bluePass);
+        greenButton =  findViewById(R.id.greenPass);
+        redButton =  findViewById(R.id.redPass);
+
+        //calls OpenMaps when clicked and also sends the buttonID for the Button
+        /*button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                openMaps();
+                openMaps(buttonIdBlue);
             }
 
+        });*/
+        greenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMaps(buttonIdGreen );
+            }
+        });
+        purpleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMaps(buttonIdPurple);
+            }
+        });
+        redButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMaps(buttonIdRed);
+            }
+        });
+        blueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMaps(buttonIdBlue);
+            }
         });
     }
 
@@ -61,9 +107,10 @@ public class Configuration extends AppCompatActivity {
         return false;
     }
 
-    public void openMaps()
+    public void openMaps(int buttonId)
     {
         Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra(EXTRA_NUMBER,buttonId); //this adds buttonId to intent which sends it to mapsActivity
         startActivity(intent);
     }
 }
