@@ -1,11 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Configuration">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginLeft="16dp"
+        android:textStyle="bold"
+        android:text="Parking Pass"
+        android:textSize="35dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.ContentFrameLayout
+        android:layout_width="295dp"
+        android:layout_height="142dp"
+        android:layout_below="@+id/textView"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="47dp">
+
+        <TextView
+            android:id="@+id/textView_Permit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="0dp"
+            android:text="What permit do you have?"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <CheckBox
+            android:id="@+id/Checkboxp-1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+            android:button="@drawable/checked"
+            android:text=" Resident"
+            tools:ignore="MissingConstraints" />
+
+        <CheckBox
+            android:id="@+id/Checkboxp-2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="60dp"
+            android:button="@drawable/checked"
+            android:text=" Faculty"
+            tools:ignore="MissingConstraints" />
+
+        <CheckBox
+            android:id="@+id/Checkboxp-3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="80dp"
+            android:button="@drawable/checked"
+            android:text=" Reserved"
+            tools:ignore="MissingConstraints" />
+
+        <CheckBox
+            android:id="@+id/Checkboxp-4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="100dp"
+            android:button="@drawable/checked"
+            android:text=" Student"
+            tools:ignore="MissingConstraints" />
+
+
+    </android.support.v7.widget.ContentFrameLayout>
+
+
+    <android.support.v7.widget.ContentFrameLayout
+        android:layout_width="295dp"
+        android:layout_height="142dp"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="151dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="47dp">
+
+        <TextView
+            android:id="@+id/textView_TimeZone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="0dp"
+            android:text="What time do you want to park?"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <CheckBox
+            android:id="@+id/Checkboxt-1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+            android:button="@drawable/checked"
+            android:text=" 7:00AM - 4:59PM"
+            tools:ignore="MissingConstraints" />
+
+        <CheckBox
+            android:id="@+id/Checkboxt-2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="60dp"
+            android:button="@drawable/checked"
+            android:text=" 5:00PM - 7:59PM"
+            tools:ignore="MissingConstraints" />
+
+        <CheckBox
+            android:id="@+id/Checkboxt-3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="80dp"
+            android:button="@drawable/checked"
+            android:text=" 8:00PM - 6:59AM"
+            tools:ignore="MissingConstraints" />
+
+
+    </android.support.v7.widget.ContentFrameLayout>
+
+    <!--
+
+
+
+    <CheckBox
+        android:id="@+id/Checkbox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:button="@drawable/checked"
+        android:text=" Resident"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="80dp"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/checkbox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:button="@drawable/checked"
+        android:text=" Faculty"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="110dp"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/checkbox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:button="@drawable/checked"
+        android:text=" Reserved"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="140dp"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/checkbox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:button="@drawable/checked"
+        android:text=" Faculty"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="170dp"
+        tools:ignore="MissingConstraints" />
+-->
+
+<!--
 
     <Button
         android:id="@+id/redPass"
@@ -62,20 +248,8 @@
         android:text="Faculty\nStaff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+-->
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="16dp"
-        android:textStyle="bold"
-        android:text="Parking Pass"
-        android:textSize="35dp"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

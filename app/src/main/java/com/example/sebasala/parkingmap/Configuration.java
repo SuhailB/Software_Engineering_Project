@@ -47,16 +47,16 @@ public class Configuration extends AppCompatActivity {
 
         //assign button object from buttons created in the XML file
         //button = findViewById(R.id.button);
-        yellowButton = findViewById(R.id.purplePass);
+        yellowButton = findViewById(R.id.Checkboxp_2);
         yellowButton.getBackground().setColorFilter(0xFFFFFF33, PorterDuff.Mode.MULTIPLY);
 
-        blueButton = findViewById(R.id.bluePass);
+        blueButton = findViewById(R.id.Checkboxp_3);
         blueButton.getBackground().setColorFilter(0xFF3385ff, PorterDuff.Mode.MULTIPLY);
 
-        greenButton =  findViewById(R.id.greenPass);
+        greenButton =  findViewById(R.id.Checkboxp_4);
         greenButton.getBackground().setColorFilter(0xFF66ff33, PorterDuff.Mode.MULTIPLY);
 
-        redButton =  findViewById(R.id.redPass);
+        redButton =  findViewById(R.id.Checkboxp_1);
         redButton.getBackground().setColorFilter(0xFFe60000, PorterDuff.Mode.MULTIPLY);
 
         //calls OpenMaps when clicked and also sends the buttonID for the Button
