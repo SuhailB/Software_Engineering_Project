@@ -38,6 +38,17 @@ public class Configuration extends AppCompatActivity {
 
     private void startApp()
     {
+        Button btnLoad = (Button) findViewById(R.id.LoadParkingSpots);
+        btnLoad.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                openMaps(5);
+            }
+        });
+
+        /*
         //Buttons associated with each parking pass
         //private Button button;
          Button yellowButton ;
@@ -59,6 +70,7 @@ public class Configuration extends AppCompatActivity {
         redButton =  findViewById(R.id.Checkboxp_1);
         redButton.getBackground().setColorFilter(0xFFe60000, PorterDuff.Mode.MULTIPLY);
 
+        */
         //calls OpenMaps when clicked and also sends the buttonID for the Button
         /*button.setOnClickListener(new View.OnClickListener()
         {
@@ -69,6 +81,7 @@ public class Configuration extends AppCompatActivity {
             }
 
         });*/
+        /*
         greenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +105,7 @@ public class Configuration extends AppCompatActivity {
             public void onClick(View v) {
                 openMaps(buttonIdBlue);
             }
-        });
+        });*/
     }
 
     public boolean isServiceAvailabel()

@@ -19,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <android.support.v7.widget.ContentFrameLayout
         android:layout_width="295dp"
         android:layout_height="142dp"
@@ -38,49 +39,44 @@
             android:textStyle="bold"
             android:visibility="visible" />
 
-        <CheckBox
-            android:id="@+id/Checkboxp-1"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/cancle_booking_radio_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
-            android:button="@drawable/checked"
-            android:text=" Resident"
-            tools:ignore="MissingConstraints" />
+            android:layout_marginTop="20dp">
 
-        <CheckBox
-            android:id="@+id/Checkboxp-2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="60dp"
-            android:button="@drawable/checked"
-            android:text=" Faculty"
-            tools:ignore="MissingConstraints" />
+            <RadioButton
+                android:id="@+id/radioChangePlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:text="Resident" />
 
-        <CheckBox
-            android:id="@+id/Checkboxp-3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="80dp"
-            android:button="@drawable/checked"
-            android:text=" Reserved"
-            tools:ignore="MissingConstraints" />
+            <RadioButton
+                android:id="@+id/radioBetterDeal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:text="Faculty" />
 
-        <CheckBox
-            android:id="@+id/Checkboxp-4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="100dp"
-            android:button="@drawable/checked"
-            android:text=" Student"
-            tools:ignore="MissingConstraints" />
+            <RadioButton
+                android:id="@+id/radioDiffHotel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:text="Reserved" />
+
+            <RadioButton
+                android:id="@+id/radioBookingMistake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:text="Student" />
+
+
+
+
+        </RadioGroup>
 
 
     </android.support.v7.widget.ContentFrameLayout>
@@ -106,7 +102,45 @@
             android:textStyle="bold"
             android:visibility="visible" />
 
-        <CheckBox
+        <RadioGroup
+            android:id="@+id/TimeZone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <RadioButton
+                android:id="@+id/TimeZoneS1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:text="7:00AM - 4:59PM" />
+
+            <RadioButton
+                android:id="@+id/TimeZoneS2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:text="5:00PM - 7:59PM" />
+
+            <RadioButton
+                android:id="@+id/TimeZoneS3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:text="8:00PM - 6:59AM" />
+
+            <RadioButton
+                android:id="@+id/TimeZoneS4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:text="Current Time" />
+
+
+        </RadioGroup>
+
+
+        <!--<CheckBox
             android:id="@+id/Checkboxt-1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -138,9 +172,144 @@
             android:button="@drawable/checked"
             android:text=" 8:00PM - 6:59AM"
             tools:ignore="MissingConstraints" />
-
+-->
 
     </android.support.v7.widget.ContentFrameLayout>
+
+    <Button
+        android:id="@+id/LoadParkingSpots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="72dp"
+        android:text="Load Parking Spots"/>
+
+
+    <!--
+        <android.support.v7.widget.ContentFrameLayout
+            android:layout_width="295dp"
+            android:layout_height="142dp"
+            android:layout_below="@+id/textView"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="47dp">
+
+            <TextView
+                android:id="@+id/textView_Permit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="0dp"
+                android:text="What permit do you have?"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <CheckBox
+                android:id="@+id/Checkboxp-1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:button="@drawable/checked"
+                android:text=" Resident"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/Checkboxp-2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="60dp"
+                android:button="@drawable/checked"
+                android:text=" Faculty"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/Checkboxp-3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="80dp"
+                android:button="@drawable/checked"
+                android:text=" Reserved"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/Checkboxp-4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="100dp"
+                android:button="@drawable/checked"
+                android:text=" Student"
+                tools:ignore="MissingConstraints" />
+
+
+        </android.support.v7.widget.ContentFrameLayout>
+
+
+        <android.support.v7.widget.ContentFrameLayout
+            android:layout_width="295dp"
+            android:layout_height="142dp"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="151dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="47dp">
+
+            <TextView
+                android:id="@+id/textView_TimeZone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="0dp"
+                android:text="What time do you want to park?"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <CheckBox
+                android:id="@+id/Checkboxt-1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:button="@drawable/checked"
+                android:text=" 7:00AM - 4:59PM"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/Checkboxt-2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="60dp"
+                android:button="@drawable/checked"
+                android:text=" 5:00PM - 7:59PM"
+                tools:ignore="MissingConstraints" />
+
+            <CheckBox
+                android:id="@+id/Checkboxt-3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="80dp"
+                android:button="@drawable/checked"
+                android:text=" 8:00PM - 6:59AM"
+                tools:ignore="MissingConstraints" />
+
+
+        </android.support.v7.widget.ContentFrameLayout>
+    -->
 
     <!--
 
