@@ -162,11 +162,8 @@ public class MapsActivity
             case 4: //show reserved or blue
                 addReservedLotsPolygons();
                 break;
-/*            case 5: // show all
-                addFacultyStaffLotsPolygons();
-                addReservedLotsPolygons();
-                addStudentLotsPolygons();
-                addReservedLotsPolygons();*/
+            case 5: // show nothing for No permit
+                break;
             default: //show everything
                 addFacultyStaffLotsPolygons();
                 addResidentReservedLotsPolygons();

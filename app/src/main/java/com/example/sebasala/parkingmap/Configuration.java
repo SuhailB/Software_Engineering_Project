@@ -1,12 +1,17 @@
 package com.example.sebasala.parkingmap;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -17,10 +22,18 @@ public class Configuration extends AppCompatActivity {
 
 
     //ID number for buttons
-    private final int  buttonIdPurple = 1;
+    private final int buttonIDNopermit = 5;
+    private final int  buttonIdYellow = 1;
     private final int buttonIdRed = 2;
     private final int buttonIdGreen = 3;
     private final int buttonIdBlue = 4;
+
+    private static final int RBP1_ID = 1000;//first radio button id
+    private static final int RBP2_ID = 1001;//second radio button id
+    private static final int RBP3_ID = 1002;//third radio button id
+    private static final int RBP4_ID = 1003;//first radio button id
+    private static final int RBT1_ID = 10000;//second radio button id
+    private static final int RBT2_ID = 10001;//third radio button id
 
     //used in sending the ID for the button clicked
     //see openMaps() for more info
@@ -36,16 +49,94 @@ public class Configuration extends AppCompatActivity {
         if(isServiceAvailabel()) startApp();
     }
 
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.ResidentPermit:
+                if (checked)
+                    // Pirates are the best
+                    openMaps(buttonIdRed);
+                    break;
+            case R.id.FacultyPermit:
+                if (checked)
+                    // Ninjas rule
+                    openMaps(buttonIdYellow);
+                    break;
+            case R.id.ReservedPermit:
+                if (checked)
+                    // Ninjas rule
+                    openMaps(buttonIdBlue);
+                break;
+            case R.id.StudentPermit:
+                if (checked)
+                    // Ninjas rule
+                    openMaps(buttonIdGreen);
+                break;
+            default:
+                openMaps(5);
+
+
+        }
+    }
+
     private void startApp()
     {
         Button btnLoad = (Button) findViewById(R.id.LoadParkingSpots);
+        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.AskPermit);
+//create the RadioButton
+        RadioButton rb1 = new RadioButton(this);
+//set an id
+        rb1.setId(RBP1_ID);
+        //create the RadioButton
+        RadioButton rb2 = new RadioButton(this);
+//set an id
+        rb1.setId(RBP2_ID);
+        //create the RadioButton
+        RadioButton rb3 = new RadioButton(this);
+//set an id
+        rb1.setId(RBP3_ID);
+        //create the RadioButton
+        RadioButton rb4 = new RadioButton(this);
+//set an id
+        rb1.setId(RBP4_ID);
+
+
+
         btnLoad.setOnClickListener(new View.OnClickListener()
         {
+
             @Override
             public void onClick(View v)
             {
-                openMaps(5);
+
+                int selectedPermit = radioGroup.getCheckedRadioButtonId();
+                RadioButton radioButton = (RadioButton) findViewById(selectedPermit);
+                String text = radioButton.getText().toString();
+
+                /*Log.d(TAG, "selectedPermit is: " + selectedPermit);
+
+                Log.d(TAG, "radioButton is: " + radioButton.toString());
+                Log.d(TAG, "text is: " + text);*/
+
+                //  onRadioButtonClicked(v);
+
+                if (text.contains("Faculty"))
+                    openMaps(1);
+                else if(text.contains("Resident"))
+                    openMaps(2);
+                else if(text.contains("Student"))
+                    openMaps(3);
+                else if(text.contains("Reserved"))
+                    openMaps(4);
+                else if(text.contains("No Permit"))
+                    openMaps(5);
+                else
+                    openMaps(6);
             }
+
         });
 
         /*
@@ -107,6 +198,32 @@ public class Configuration extends AppCompatActivity {
             }
         });*/
     }
+
+    /*public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.ResidentPermit:
+                if (checked)
+                    openMaps(buttonIdRed);
+                    break;
+            case R.id.FacultyPermit:
+                if (checked)
+                    openMaps(buttonIdYellow);
+                    break;
+            case R.id.ReservedPermit:
+                if(checked)
+                    openMaps(buttonIdBlue);
+                break;
+            case R.id.StudentPermit:
+                if(checked)
+                    openMaps(buttonIdGreen);
+                break;
+
+        }
+    }*/
 
     public boolean isServiceAvailabel()
     {

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,7 +23,7 @@
 
     <android.support.v7.widget.ContentFrameLayout
         android:layout_width="295dp"
-        android:layout_height="142dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="47dp">
@@ -40,40 +41,45 @@
             android:visibility="visible" />
 
         <RadioGroup
-            android:id="@+id/cancle_booking_radio_group"
+            android:id="@+id/AskPermit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
 
             <RadioButton
-                android:id="@+id/radioChangePlan"
+                android:id="@+id/ResidentPermit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorPrimary"
                 android:text="Resident" />
 
             <RadioButton
-                android:id="@+id/radioBetterDeal"
+                android:id="@+id/FacultyPermit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorPrimary"
                 android:text="Faculty" />
 
             <RadioButton
-                android:id="@+id/radioDiffHotel"
+                android:id="@+id/ReservedPermit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorPrimary"
                 android:text="Reserved" />
 
             <RadioButton
-                android:id="@+id/radioBookingMistake"
+                android:id="@+id/StudentPermit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorPrimary"
                 android:text="Student" />
 
-
+            <RadioButton
+                android:id="@+id/NoPermit"
+                android:layout_width="316dp"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:text="No Permit" />
 
 
         </RadioGroup>
@@ -86,9 +92,11 @@
         android:layout_width="295dp"
         android:layout_height="142dp"
         android:layout_below="@+id/textView"
-        android:layout_marginTop="151dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="228dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="47dp">
+        tools:layout_editor_absoluteY="47dp"
+        android:layout_alignParentLeft="true">
 
         <TextView
             android:id="@+id/textView_TimeZone"
