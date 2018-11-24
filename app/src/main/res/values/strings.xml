@@ -2,4 +2,24 @@
     <string name="app_name">ParkingMap</string>
     <string name="title_activity_maps">Map</string>
     <string name="go">Go!</string>
+    <string name="thierry">thierry</string>
+    <string name="ange1">ange1</string>
+    <string name="ishimwe">ishimwe</string>
+    <string name="lionel">lionel</string>
+    <string name="imena">imena</string>
+    <string name="kirenga">kirenga</string>
+    <string name="clicked_thierry">clicked_thierry</string>
+    <string name="clicked_lionel">clicked_lionel</string>
+    <string name="reserved">Reserved</string>
+    <string name="resident">Resident</string>
+    <string name="faculty">Faculty</string>
+    <string name="student">Student</string>
+    <string name="_7_00am_4_49_pm">7:00am - 4:49 pm</string>
+    <string name="_5_00pm_7_59pm">5:00pm - 7:59Pm</string>
+    <string name="_8_00pm_6_59am">8:00pm - 6:59am</string>
+    <string name="current_time">Current Time</string>
+    <string name="time">Time</string>
+    <string name="park">park</string>
+    <string name="what_permit_do_you_have">What permit do you have</string>
+
 </resources>

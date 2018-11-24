@@ -6,25 +6,36 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Configuration extends AppCompatActivity {
 
-    //Buttons associated with each parking pass
-    //private Button button;
-    private Button purpleButton ;
-    private Button blueButton;
-    private Button greenButton;
-    private Button redButton ;
 
-    //ID number for buttons
-    private final int  buttonIdPurple = 1;
-    private final int buttonIdRed = 2;
-    private final int buttonIdGreen = 3;
-    private final int buttonIdBlue = 4;
+    //on screen
+    private RadioGroup radioGroupAnge;
+    private RadioGroup radioGroupLionel;
+    private Button button;
+
+    //classes
+    Variables variables;
+    Calendar calendar;
+    SimpleDateFormat simpleDateFormat;
+    String Date;
+    TextView dateTimeView;
+    Button timeButton;
+
+
+    private boolean isChecking = true;
+    private int angeCheckedId = R.id.reserved;
+    private int lionelCheckId = R.id.FivetoEight;
 
     //used in sending the ID for the button clicked
     //see openMaps() for more info
@@ -37,52 +48,69 @@ public class Configuration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
+        variables = new Variables();
+
         if(isServiceAvailabel()) startApp();
     }
 
     private void startApp()
     {
-        //assign button object from buttons created in the XML file
-        //button = findViewById(R.id.button);
-        purpleButton = findViewById(R.id.purplePass);
-        blueButton = findViewById(R.id.bluePass);
-        greenButton =  findViewById(R.id.greenPass);
-        redButton =  findViewById(R.id.redPass);
 
-        //calls OpenMaps when clicked and also sends the buttonID for the Button
-        /*button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                openMaps(buttonIdBlue);
-            }
+        dateTimeView = (TextView) findViewById(R.id.seeTime);
+        timeButton = (Button) findViewById(R.id.clickTime);
 
-        });*/
-        greenButton.setOnClickListener(new View.OnClickListener() {
+        timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                openMaps(buttonIdGreen );
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+                Date = simpleDateFormat.format(calendar.getTime());
+                if(Date.compareTo("17:00:00") > 0)
+                    dateTimeView.setText(Date);
+
             }
         });
-        purpleButton.setOnClickListener(new View.OnClickListener() {
+
+        radioGroupAnge = (RadioGroup) findViewById(R.id.Permit);
+        radioGroupLionel = (RadioGroup) findViewById(R.id.Time);
+        button = (Button) findViewById(R.id.LoadParkingSpots);
+
+
+        radioGroupAnge.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                openMaps(buttonIdPurple);
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i != -1 && isChecking)
+                {
+                    isChecking = false;
+                    angeCheckedId = i;
+                    PermitSelected();
+                }
+                isChecking = true;
             }
         });
-        redButton.setOnClickListener(new View.OnClickListener() {
+
+
+        radioGroupLionel.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                openMaps(buttonIdRed);
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i != -1 && isChecking)
+                {
+                    isChecking = false;
+                    lionelCheckId = i;
+                    TimeSelected();
+                }
+                isChecking = true;
+
             }
         });
-        blueButton.setOnClickListener(new View.OnClickListener() {
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                openMaps(buttonIdBlue);
+            public void onClick(View view) {
+                openMaps();
             }
         });
+
     }
 
     public boolean isServiceAvailabel()
@@ -107,10 +135,62 @@ public class Configuration extends AppCompatActivity {
         return false;
     }
 
-    public void openMaps(int buttonId)
+    public void openMaps()
     {
+        int hey = 0;
+        hey = variables.PermitGetter();
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra(EXTRA_NUMBER,buttonId); //this adds buttonId to intent which sends it to mapsActivity
+        intent.putExtra(EXTRA_NUMBER,variables.PermitGetter()); //this adds buttonId to intent which sends it to mapsActivity
         startActivity(intent);
     }
+
+    public void PermitSelected()
+    {
+        if (angeCheckedId == R.id.faculty) {
+            Toast.makeText(this, "Faculty", Toast.LENGTH_SHORT).show();
+            variables.PermitSetter(1);
+        } else if (angeCheckedId == R.id.resident) {
+            Toast.makeText(this, "Resident", Toast.LENGTH_SHORT).show();
+            variables.PermitSetter(2);
+        } else if (angeCheckedId == R.id.reserved) {
+            Toast.makeText(this, "Reserved", Toast.LENGTH_SHORT).show();
+            variables.PermitSetter(4);
+        } else if (angeCheckedId == R.id.student) {
+            variables.PermitSetter(3);
+            Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void TimeSelected()
+    {
+        if (lionelCheckId == R.id.SeventoFive) {
+            Toast.makeText(this, "7:00am - 4:59pm", Toast.LENGTH_LONG).show();
+            variables.PermitSetter(1);
+        } else if (lionelCheckId == R.id.FivetoEight) {
+            variables.PermitSetter(2);
+            Toast.makeText(this, "5:00pm - 7:59pm", Toast.LENGTH_LONG).show();
+        } else if (lionelCheckId == R.id.EighttoSeven) {
+            variables.PermitSetter(3);
+            Toast.makeText(this, "8:00pm - 7:00am", Toast.LENGTH_SHORT).show();
+        }else if (lionelCheckId == R.id.currentTime) {
+            variables.PermitSetter(4);
+            Toast.makeText(this, "Current time", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void seeTime(View view) {
+    }
+}
+
+class Variables
+{
+    private int IDselected;
+    private int TimeSelected;
+    Variables() { IDselected = 0; TimeSelected =0;}
+    void PermitSetter(int xx) { IDselected = xx; }
+    int PermitGetter() { return IDselected; }
+    void Timesetter(int xx) { TimeSelected = xx; }
+    int Timegetter(){ return TimeSelected; }
 }

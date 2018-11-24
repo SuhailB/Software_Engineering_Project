@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">park</string>
+    <string name="park">Park</string>
+    <string name="thierry">thierry</string>
+    <string name="ange">ange</string>
+    <string name="ishimwe">ishimwe</string>
+    <string name="lionel">lionel</string>
+    <string name="imena">imena</string>
+    <string name="kirenga">Kirenga</string>
+    <string name="clicked">clicked</string>
+    <string name="ange1">ange1</string>
+    <string name="clicked_lionel">clicked lionel</string>
+    <string name="clicked_thierry">clicked thierry</string>
+</resources>

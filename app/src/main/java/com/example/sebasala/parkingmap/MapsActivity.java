@@ -50,7 +50,7 @@ public class MapsActivity
         GoogleMap.OnPolygonClickListener,
         GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener
-    {
+{
 
     private GoogleMap mMap;
 
@@ -68,14 +68,15 @@ public class MapsActivity
 
     private static final int COLOR_BLACK_ARGB = 0xff000000;
     private static final int COLOR_WHITE_ARGB = 0xffffffff;
-    private static final int COLOR_GREEN_ARGB = 0xff388E3C;
+    private static final int COLOR_GREEN_ARGB = 0xff00ff00;
     private static final int COLOR_PURPLE_ARGB = 0xff81C784;
     private static final int COLOR_ORANGE_ARGB = 0xffF57F17;
     private static final int COLOR_BLUE_ARGB = 0xff0a9eee;
     private static final int COLOR_RED_ARGB = 0xffff0000;
+    private static final int COLOR_YELLOW_ARGB = 0xffffff00;
 
     private static final int POLYLINE_STROKE_WIDTH_PX = 12;
-    private static final int POLYGON_STROKE_WIDTH_PX = 2;
+    private static final int POLYGON_STROKE_WIDTH_PX = 0;
     private static final int PATTERN_DASH_LENGTH_PX = 20;
     private static final int PATTERN_GAP_LENGTH_PX = 20;
     private static final PatternItem DOT = new Dot();
@@ -126,16 +127,16 @@ public class MapsActivity
         FacultyLots = new ArrayList<Polygon>();
 
         if (ContextCompat.checkSelfPermission(this, FINE_LOCATION  ) != PackageManager.PERMISSION_GRANTED
-        ||  ContextCompat.checkSelfPermission(this, COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                ||  ContextCompat.checkSelfPermission(this, COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
 
             // Permission is not granted
             Log.d("MapActivity", "Permission not granted");
 
-                if(ContextCompat.checkSelfPermission(this, FINE_LOCATION  ) != PackageManager.PERMISSION_GRANTED)
-                    ActivityCompat.requestPermissions(this, new String[]{FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
-                if(ContextCompat.checkSelfPermission(this, COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-                    ActivityCompat.requestPermissions(this, new String[]{FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+            if(ContextCompat.checkSelfPermission(this, FINE_LOCATION  ) != PackageManager.PERMISSION_GRANTED)
+                ActivityCompat.requestPermissions(this, new String[]{FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+            if(ContextCompat.checkSelfPermission(this, COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                ActivityCompat.requestPermissions(this, new String[]{FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
 
 
         }
@@ -161,6 +162,8 @@ public class MapsActivity
             case 4: //show reserved or blue
                 addReservedLotsPolygons();
                 break;
+            case 5: // show nothing for No permit
+                break;
             default: //show everything
                 addFacultyStaffLotsPolygons();
                 addResidentReservedLotsPolygons();
@@ -178,7 +181,7 @@ public class MapsActivity
         // Set listeners for click events.
         // Add a marker in UARK and move the camera
         LatLng UARK = new LatLng(36.0685126, -94.1729845);
-       // mMap.addMarker(new MarkerOptions().position(UARK).title("Univeristy of Arkansas"));
+        // mMap.addMarker(new MarkerOptions().position(UARK).title("Univeristy of Arkansas"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UARK, 15));
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
@@ -191,12 +194,1258 @@ public class MapsActivity
     public void addFacultyStaffLotsPolygons()
     {
         //add Faculty staff lots here
+        Polygon FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.070265 ,-94.168294),
+                        new LatLng(36.070265 ,-94.168115),
+                        new LatLng(36.070502 ,-94.168111),
+                        new LatLng(36.070514 ,-94.168291),
+                        new LatLng(36.070269 ,-94.168297),
+                        new LatLng(36.070265 ,-94.168294),
+                        new LatLng(36.070265 ,-94.168294)));
+        FacultyPolygon.setTag("lotId:64");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.069735 ,-94.179887),
+                        new LatLng(36.069357 ,-94.179889),
+                        new LatLng(36.069334 ,-94.17886),
+                        new LatLng(36.069316 ,-94.17784),
+                        new LatLng(36.070017 ,-94.177838),
+                        new LatLng(36.070173 ,-94.178085),
+                        new LatLng(36.070192 ,-94.179831),
+                        new LatLng(36.070166 ,-94.179847),
+                        new LatLng(36.069776 ,-94.179879),
+                        new LatLng(36.069735 ,-94.179887),
+                        new LatLng(36.069735 ,-94.179887),
+                        new LatLng(36.069735 ,-94.179887),
+                        new LatLng(36.069735 ,-94.179887)));
+        FacultyPolygon.setTag("lotId:1");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.07033 ,-94.178877),
+                        new LatLng(36.070176 ,-94.17888),
+                        new LatLng(36.070185 ,-94.179837),
+                        new LatLng(36.07035 ,-94.179698),
+                        new LatLng(36.07033 ,-94.178877),
+                        new LatLng(36.07033 ,-94.178877),
+                        new LatLng(36.07033 ,-94.178877),
+                        new LatLng(36.07033 ,-94.178877)));
+        FacultyPolygon.setTag("lotId:1");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.072776 ,-94.178969),
+                        new LatLng(36.072785 ,-94.179345),
+                        new LatLng(36.072735 ,-94.179348),
+                        new LatLng(36.072734 ,-94.179332),
+                        new LatLng(36.072577 ,-94.179337),
+                        new LatLng(36.07257 ,-94.179004),
+                        new LatLng(36.072727 ,-94.178999),
+                        new LatLng(36.072729 ,-94.178971),
+                        new LatLng(36.072776 ,-94.178969)));
+        FacultyPolygon.setTag("lotId:82");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.067383 ,-94.177833),
+                        new LatLng(36.067341 ,-94.177623),
+                        new LatLng(36.0673 ,-94.177631),
+                        new LatLng(36.067308 ,-94.177682),
+                        new LatLng(36.067206 ,-94.17771),
+                        new LatLng(36.067226 ,-94.177837),
+                        new LatLng(36.06733 ,-94.177806),
+                        new LatLng(36.067341 ,-94.177844),
+                        new LatLng(36.067383 ,-94.177833)));
+        FacultyPolygon.setTag("lotId:36");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.062079 ,-94.180456),
+                        new LatLng(36.062017 ,-94.180452),
+                        new LatLng(36.062032 ,-94.180713),
+                        new LatLng(36.062085 ,-94.180706),
+                        new LatLng(36.062079 ,-94.180456)));
+        FacultyPolygon.setTag("lotId:7");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.057761 ,-94.183255),
+                        new LatLng(36.058038 ,-94.183236),
+                        new LatLng(36.058049 ,-94.183753),
+                        new LatLng(36.058049 ,-94.183762),
+                        new LatLng(36.057769 ,-94.183767),
+                        new LatLng(36.057761 ,-94.183255)));
+        FacultyPolygon.setTag("lotId:77");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.067764 ,-94.164855),
+                        new LatLng(36.06778 ,-94.164835),
+                        new LatLng(36.068043 ,-94.164835),
+                        new LatLng(36.068091 ,-94.164834),
+                        new LatLng(36.068093 ,-94.164964),
+                        new LatLng(36.068047 ,-94.164964),
+                        new LatLng(36.068046 ,-94.165001),
+                        new LatLng(36.068048 ,-94.165046),
+                        new LatLng(36.068096 ,-94.165051),
+                        new LatLng(36.068101 ,-94.165114),
+                        new LatLng(36.068048 ,-94.165117),
+                        new LatLng(36.068045 ,-94.165163),
+                        new LatLng(36.067934 ,-94.16517),
+                        new LatLng(36.067932 ,-94.165172),
+                        new LatLng(36.067927 ,-94.16529),
+                        new LatLng(36.067857 ,-94.165295),
+                        new LatLng(36.067856 ,-94.165238),
+                        new LatLng(36.067795 ,-94.165187),
+                        new LatLng(36.06777 ,-94.165188),
+                        new LatLng(36.067766 ,-94.165069),
+                        new LatLng(36.067764 ,-94.164855)));
+        FacultyPolygon.setTag("lotId:76");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.057565 ,-94.180737),
+                        new LatLng(36.057566 ,-94.180802),
+                        new LatLng(36.057534 ,-94.180805),
+                        new LatLng(36.057534 ,-94.18094),
+                        new LatLng(36.057294 ,-94.180954),
+                        new LatLng(36.057289 ,-94.180746),
+                        new LatLng(36.057565 ,-94.180737)));
+        FacultyPolygon.setTag("lotId:14");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.058149 ,-94.183388),
+                        new LatLng(36.058271 ,-94.183385),
+                        new LatLng(36.058278 ,-94.183564),
+                        new LatLng(36.058357 ,-94.183569),
+                        new LatLng(36.05832 ,-94.18362),
+                        new LatLng(36.058542 ,-94.183616),
+                        new LatLng(36.058579 ,-94.18356),
+                        new LatLng(36.058687 ,-94.183556),
+                        new LatLng(36.058583 ,-94.183672),
+                        new LatLng(36.058616 ,-94.183721),
+                        new LatLng(36.058189 ,-94.183729),
+                        new LatLng(36.058151 ,-94.183647),
+                        new LatLng(36.058149 ,-94.183388)));
+        FacultyPolygon.setTag("lotId:12");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.065791 ,-94.178158),
+                        new LatLng(36.065802 ,-94.178367),
+                        new LatLng(36.065516 ,-94.178349),
+                        new LatLng(36.065505 ,-94.178166),
+                        new LatLng(36.065791 ,-94.178158)));
+        FacultyPolygon.setTag("lotId:34");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.061181 ,-94.177138),
+                        new LatLng(36.060968 ,-94.177411),
+                        new LatLng(36.060965 ,-94.17741),
+                        new LatLng(36.060884 ,-94.177425),
+                        new LatLng(36.06083 ,-94.177361),
+                        new LatLng(36.060854 ,-94.177327),
+                        new LatLng(36.060855 ,-94.177117),
+                        new LatLng(36.060897 ,-94.17706),
+                        new LatLng(36.060865 ,-94.177015),
+                        new LatLng(36.060969 ,-94.176878),
+                        new LatLng(36.061184 ,-94.177133),
+                        new LatLng(36.061181 ,-94.177138)));
+        FacultyPolygon.setTag("lotId:20");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.07162 ,-94.168275),
+                        new LatLng(36.07141 ,-94.168275),
+                        new LatLng(36.071412 ,-94.168393),
+                        new LatLng(36.071366 ,-94.168436),
+                        new LatLng(36.071366 ,-94.16879),
+                        new LatLng(36.071457 ,-94.168784),
+                        new LatLng(36.071451 ,-94.168457),
+                        new LatLng(36.071483 ,-94.16842),
+                        new LatLng(36.071527 ,-94.168417),
+                        new LatLng(36.071553 ,-94.168436),
+                        new LatLng(36.071555 ,-94.168495),
+                        new LatLng(36.071544 ,-94.168535),
+                        new LatLng(36.071546 ,-94.16872),
+                        new LatLng(36.071630999999996 ,-94.168717),
+                        new LatLng(36.071629 ,-94.168508),
+                        new LatLng(36.071598 ,-94.168529),
+                        new LatLng(36.071596 ,-94.168438),
+                        new LatLng(36.071626 ,-94.168403),
+                        new LatLng(36.07162 ,-94.168275),
+                        new LatLng(36.07162 ,-94.168275)));
+        FacultyPolygon.setTag("lotId:88");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.067418 ,-94.167387),
+                        new LatLng(36.067441 ,-94.167323),
+                        new LatLng(36.067718 ,-94.167299),
+                        new LatLng(36.067718 ,-94.167471),
+                        new LatLng(36.067419 ,-94.167497),
+                        new LatLng(36.067398 ,-94.167444),
+                        new LatLng(36.067418 ,-94.167387)));
+        FacultyPolygon.setTag("lotId:50");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.072508 ,-94.173146),
+                        new LatLng(36.072504 ,-94.172737),
+                        new LatLng(36.072263 ,-94.172745),
+                        new LatLng(36.072265 ,-94.173053),
+                        new LatLng(36.072429 ,-94.173048),
+                        new LatLng(36.072423 ,-94.173151),
+                        new LatLng(36.072502 ,-94.173148),
+                        new LatLng(36.072508 ,-94.173146)));
+        FacultyPolygon.setTag("lotId:57");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.073771 ,-94.17575),
+                        new LatLng(36.072778 ,-94.175777),
+                        new LatLng(36.072778 ,-94.175836),
+                        new LatLng(36.073767 ,-94.175806),
+                        new LatLng(36.073771 ,-94.17575)));
+        FacultyPolygon.setTag("lotId:81");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.072819 ,-94.176404),
+                        new LatLng(36.072827 ,-94.176357),
+                        new LatLng(36.073785 ,-94.176301),
+                        new LatLng(36.073791 ,-94.176355),
+                        new LatLng(36.073321 ,-94.176373),
+                        new LatLng(36.072819 ,-94.176404)));
+        FacultyPolygon.setTag("lotId:81");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:223
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.062354 ,-94.178164),
+                        new LatLng(36.063028 ,-94.178128),
+                        new LatLng(36.063034 ,-94.178185),
+                        new LatLng(36.062412 ,-94.178219),
+                        new LatLng(36.062411 ,-94.178498),
+                        new LatLng(36.062977 ,-94.178477),
+                        new LatLng(36.063003 ,-94.178466),
+                        new LatLng(36.063003 ,-94.178541),
+                        new LatLng(36.062363 ,-94.178565),
+                        new LatLng(36.062354 ,-94.178164)));
+        FacultyPolygon.setTag("lotId:21");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:246
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.061304 ,-94.177016),
+                        new LatLng(36.061039 ,-94.176713),
+                        new LatLng(36.061019 ,-94.176736),
+                        new LatLng(36.061283 ,-94.177041),
+                        new LatLng(36.061304 ,-94.177016)));
+        FacultyPolygon.setTag("lotId:20");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:247
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.060987 ,-94.176852),
+                        new LatLng(36.060999 ,-94.176789),
+                        new LatLng(36.061252 ,-94.177086),
+                        new LatLng(36.061238 ,-94.177147),
+                        new LatLng(36.060987 ,-94.176852),
+                        new LatLng(36.060987 ,-94.176852)));
+        FacultyPolygon.setTag("lotId:20");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:286
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.069254 ,-94.16702),
+                        new LatLng(36.069384 ,-94.167019),
+                        new LatLng(36.069395 ,-94.167019),
+                        new LatLng(36.06941 ,-94.167655),
+                        new LatLng(36.069268 ,-94.167666),
+                        new LatLng(36.069254 ,-94.16702)));
+        FacultyPolygon.setTag("lotId:106");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:309
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.067571 ,-94.167539),
+                        new LatLng(36.067543 ,-94.167603),
+                        new LatLng(36.067441 ,-94.167615),
+                        new LatLng(36.067458 ,-94.167545),
+                        new LatLng(36.067562 ,-94.16754),
+                        new LatLng(36.067571 ,-94.167539)));
+        FacultyPolygon.setTag("lotId:50");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:323
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.06498 ,-94.178243),
+                        new LatLng(36.064319 ,-94.178262),
+                        new LatLng(36.064312 ,-94.178133),
+                        new LatLng(36.064967 ,-94.178112),
+                        new LatLng(36.064965 ,-94.17823),
+                        new LatLng(36.06498 ,-94.178243)));
+        FacultyPolygon.setTag("lotId:111");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:324
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.064299 ,-94.177707),
+                        new LatLng(36.064696 ,-94.177699),
+                        new LatLng(36.064707 ,-94.177814),
+                        new LatLng(36.064297 ,-94.177817),
+                        new LatLng(36.064299 ,-94.177726),
+                        new LatLng(36.064299 ,-94.177707)));
+        FacultyPolygon.setTag("lotId:111");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:327
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.07353 ,-94.179504),
+                        new LatLng(36.073493 ,-94.179507),
+                        new LatLng(36.073495 ,-94.179693),
+                        new LatLng(36.073531 ,-94.179723),
+                        new LatLng(36.073532 ,-94.179513),
+                        new LatLng(36.07353 ,-94.179504)));
+        FacultyPolygon.setTag("lotId:79");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:334
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.067608 ,-94.167528),
+                        new LatLng(36.067585 ,-94.167607),
+                        new LatLng(36.067694 ,-94.167592),
+                        new LatLng(36.067713 ,-94.167512),
+                        new LatLng(36.067664 ,-94.167518),
+                        new LatLng(36.06761 ,-94.167526),
+                        new LatLng(36.067608 ,-94.167528)));
+        FacultyPolygon.setTag("lotId:50");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:343
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.067089 ,-94.178211),
+                        new LatLng(36.067089 ,-94.178258),
+                        new LatLng(36.066994 ,-94.178261),
+                        new LatLng(36.066989 ,-94.178215),
+                        new LatLng(36.06708 ,-94.178212),
+                        new LatLng(36.067089 ,-94.178211)));
+        FacultyPolygon.setTag("lotId:36");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:344
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.06699 ,-94.178452),
+                        new LatLng(36.066987 ,-94.178525),
+                        new LatLng(36.06674 ,-94.178529),
+                        new LatLng(36.06674 ,-94.178451),
+                        new LatLng(36.066982 ,-94.178454),
+                        new LatLng(36.06699 ,-94.178452)));
+        FacultyPolygon.setTag("lotId:36");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:345
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.058969 ,-94.183664),
+                        new LatLng(36.058808 ,-94.183647),
+                        new LatLng(36.058799 ,-94.183743),
+                        new LatLng(36.058972 ,-94.183734),
+                        new LatLng(36.058973 ,-94.183673),
+                        new LatLng(36.058969 ,-94.183664)));
+        FacultyPolygon.setTag("lotId:11");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:356
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.058696 ,-94.183302),
+                        new LatLng(36.0587 ,-94.183547),
+                        new LatLng(36.058726 ,-94.183549),
+                        new LatLng(36.058722 ,-94.183302),
+                        new LatLng(36.058703 ,-94.183302),
+                        new LatLng(36.058696 ,-94.183302)));
+        FacultyPolygon.setTag("lotId:12");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:364
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.073018 ,-94.17337),
+                        new LatLng(36.07303 ,-94.174173),
+                        new LatLng(36.072551 ,-94.174188),
+                        new LatLng(36.072532 ,-94.173386),
+                        new LatLng(36.073015 ,-94.173372),
+                        new LatLng(36.073018 ,-94.17337)));
+        FacultyPolygon.setTag("lotId:129");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:365
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.072762 ,-94.173183),
+                        new LatLng(36.072759 ,-94.172856),
+                        new LatLng(36.072526 ,-94.17286),
+                        new LatLng(36.072529 ,-94.173189),
+                        new LatLng(36.07276 ,-94.173185),
+                        new LatLng(36.072762 ,-94.173183)));
+        FacultyPolygon.setTag("lotId:130");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:368
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.071286 ,-94.168169),
+                        new LatLng(36.071299 ,-94.167645),
+                        new LatLng(36.071428 ,-94.167674),
+                        new LatLng(36.07141 ,-94.167783),
+                        new LatLng(36.071497 ,-94.167785),
+                        new LatLng(36.071512 ,-94.167694),
+                        new LatLng(36.071581 ,-94.167705),
+                        new LatLng(36.071569 ,-94.167789),
+                        new LatLng(36.07161 ,-94.167795),
+                        new LatLng(36.071616 ,-94.167796),
+                        new LatLng(36.071625 ,-94.168155),
+                        new LatLng(36.071574 ,-94.168168),
+                        new LatLng(36.071573 ,-94.168208),
+                        new LatLng(36.071386 ,-94.168232),
+                        new LatLng(36.071377 ,-94.168192),
+                        new LatLng(36.071286 ,-94.168169)));
+        FacultyPolygon.setTag("lotId:133");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:375
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.066254 ,-94.179077),
+                        new LatLng(36.066197 ,-94.179079),
+                        new LatLng(36.06619 ,-94.17887),
+                        new LatLng(36.066249 ,-94.178867),
+                        new LatLng(36.066256 ,-94.179073),
+                        new LatLng(36.066254 ,-94.179077)));
+        FacultyPolygon.setTag("lotId:135");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:376
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.066308 ,-94.178835),
+                        new LatLng(36.066358 ,-94.178837),
+                        new LatLng(36.066367 ,-94.179103),
+                        new LatLng(36.06633 ,-94.179288),
+                        new LatLng(36.06646 ,-94.179345),
+                        new LatLng(36.066475 ,-94.179293),
+                        new LatLng(36.066703 ,-94.179276),
+                        new LatLng(36.066699 ,-94.179005),
+                        new LatLng(36.066754 ,-94.179004),
+                        new LatLng(36.06682 ,-94.179183),
+                        new LatLng(36.06687 ,-94.179185),
+                        new LatLng(36.066859 ,-94.17876),
+                        new LatLng(36.066691 ,-94.178761),
+                        new LatLng(36.06669 ,-94.178733),
+                        new LatLng(36.066308 ,-94.178719),
+                        new LatLng(36.066308 ,-94.178827),
+                        new LatLng(36.066308 ,-94.178835),
+                        new LatLng(36.066308 ,-94.178835)));
+        FacultyPolygon.setTag("lotId:135");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:378
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.063222 ,-94.168162),
+                        new LatLng(36.06322 ,-94.167997),
+                        new LatLng(36.063791 ,-94.167746),
+                        new LatLng(36.064106 ,-94.167626),
+                        new LatLng(36.064132 ,-94.167705),
+                        new LatLng(36.06413 ,-94.167834),
+                        new LatLng(36.064067 ,-94.167836),
+                        new LatLng(36.063442 ,-94.16816),
+                        new LatLng(36.063232 ,-94.168165),
+                        new LatLng(36.063222 ,-94.168162)));
+        FacultyPolygon.setTag("lotId:137");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+//:380
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.062109 ,-94.181714),
+                        new LatLng(36.062107 ,-94.181512),
+                        new LatLng(36.061966 ,-94.18151),
+                        new LatLng(36.061971 ,-94.181713),
+                        new LatLng(36.062101 ,-94.181714),
+                        new LatLng(36.062109 ,-94.181714)));
+        FacultyPolygon.setTag("lotId:139");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:383
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.063617 ,-94.176606),
+                        new LatLng(36.063349 ,-94.17643),
+                        new LatLng(36.063331 ,-94.176458),
+                        new LatLng(36.063604 ,-94.176639),
+                        new LatLng(36.063615 ,-94.176607),
+                        new LatLng(36.063617 ,-94.176606)));
+        FacultyPolygon.setTag("lotId:140");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:390
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.065097 ,-94.178227),
+                        new LatLng(36.065096 ,-94.177696),
+                        new LatLng(36.064991 ,-94.177696),
+                        new LatLng(36.064999 ,-94.178231),
+                        new LatLng(36.065092 ,-94.178233),
+                        new LatLng(36.065097 ,-94.178227)));
+        FacultyPolygon.setTag("lotId:111");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:404
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.06436 ,-94.18048),
+                        new LatLng(36.064432 ,-94.180488),
+                        new LatLng(36.06444 ,-94.180917),
+                        new LatLng(36.064369 ,-94.18092),
+                        new LatLng(36.064356 ,-94.180502),
+                        new LatLng(36.06436 ,-94.18048)));
+        FacultyPolygon.setTag("lotId:5");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:413
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.070577 ,-94.181555),
+                        new LatLng(36.070586 ,-94.181965),
+                        new LatLng(36.070998 ,-94.18195),
+                        new LatLng(36.07099 ,-94.18152),
+                        new LatLng(36.070904 ,-94.181524),
+                        new LatLng(36.070583 ,-94.181544),
+                        new LatLng(36.070577 ,-94.181555)));
+        FacultyPolygon.setTag("lotId:147");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:414
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.057153 ,-94.180763),
+                        new LatLng(36.056951 ,-94.180770999999993),
+                        new LatLng(36.056954 ,-94.18097),
+                        new LatLng(36.05716 ,-94.180964),
+                        new LatLng(36.057149 ,-94.180774),
+                        new LatLng(36.057153 ,-94.180763)));
+        FacultyPolygon.setTag("lotId:150");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:415
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.056883 ,-94.181218),
+                        new LatLng(36.057153 ,-94.181218),
+                        new LatLng(36.057109 ,-94.183391),
+                        new LatLng(36.056711 ,-94.183403),
+                        new LatLng(36.056793 ,-94.181217),
+                        new LatLng(36.056884 ,-94.181217),
+                        new LatLng(36.056883 ,-94.181218),
+                        new LatLng(36.056883 ,-94.181218)));
+        FacultyPolygon.setTag("lotId:150");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:425
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.059884 ,-94.17691),
+                        new LatLng(36.059869 ,-94.17649),
+                        new LatLng(36.059823 ,-94.176493),
+                        new LatLng(36.059828 ,-94.176914),
+                        new LatLng(36.059878 ,-94.176912),
+                        new LatLng(36.059884 ,-94.17691)));
+        FacultyPolygon.setTag("lotId:16");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:427
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.066955 ,-94.168467),
+                        new LatLng(36.067643 ,-94.16844),
+                        new LatLng(36.067644 ,-94.168472),
+                        new LatLng(36.066962 ,-94.168491),
+                        new LatLng(36.066955 ,-94.168467),
+                        new LatLng(36.066955 ,-94.168467),
+                        new LatLng(36.066955 ,-94.168467)));
+        FacultyPolygon.setTag("lotId:156");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:436
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.061496 ,-94.181273),
+                        new LatLng(36.06151 ,-94.181576),
+                        new LatLng(36.061458 ,-94.181576),
+                        new LatLng(36.061442 ,-94.18128),
+                        new LatLng(36.061487 ,-94.181276),
+                        new LatLng(36.061496 ,-94.181273)));
+        FacultyPolygon.setTag("lotId:158");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+//:451
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.071647 ,-94.170174),
+                        new LatLng(36.071078 ,-94.170196),
+                        new LatLng(36.071091 ,-94.170947),
+                        new LatLng(36.071668 ,-94.170926),
+                        new LatLng(36.07165 ,-94.170175),
+                        new LatLng(36.071647 ,-94.170174)));
+        FacultyPolygon.setTag("lotId:60");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
+        FacultyPolygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true).add(
+                        new LatLng(36.071632 ,-94.17008),
+                        new LatLng(36.071194 ,-94.17008),
+                        new LatLng(36.07119 ,-94.169833),
+                        new LatLng(36.071645 ,-94.169844),
+                        new LatLng(36.071649 ,-94.170037),
+                        new LatLng(36.071632 ,-94.17008)));
+        FacultyPolygon.setTag("lotId:60");
+        stylePolygon(FacultyPolygon, "Faculty");
+        FacultyLots.add(FacultyPolygon);
+
     }
 
     public void addStudentLotsPolygons()
     {
-        //addStudent lots here
+        Log.d(TAG, "poplulating polygons");
+
+        //jQuery18005004372196424305_1541394907250([
+//{"id":49,"lotId":4,"zoneType":4,"color":"#195619","shape":"
+        Polygon polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.06568, -94.180322),
+                        new LatLng(36.065688, -94.180561),
+                        new LatLng(36.065638, -94.180561),
+                        new LatLng(36.065643, -94.180687),
+                        new LatLng(36.065684, -94.180684),
+                        new LatLng(36.065697, -94.180955),
+                        new LatLng(36.065647, -94.180963),
+                        new LatLng(36.065656, -94.181154),
+                        new LatLng(36.06571, -94.181148),
+                        new LatLng(36.065714, -94.181306),
+                        new LatLng(36.065552, -94.181314),
+                        new LatLng(36.065545, -94.181129),
+                        new LatLng(36.065591, -94.181129),
+                        new LatLng(36.065584, -94.181025),
+                        new LatLng(36.065539, -94.181017),
+                        new LatLng(36.065526, -94.180724),
+                        new LatLng(36.06558, -94.180724),
+                        new LatLng(36.065578, -94.180628),
+                        new LatLng(36.065537, -94.180631),
+                        new LatLng(36.065524, -94.180378),
+                        new LatLng(36.065578, -94.180378),
+                        new LatLng(36.065571, -94.180317),
+                        new LatLng(36.06568, -94.180322)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Stdent");
+        StudentsLots.add(polygon);
+
+//{"id":50,"lotId":3,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.066725, -94.180282),
+                        new LatLng(36.06676, -94.180727),
+                        new LatLng(36.066324, -94.180751),
+                        new LatLng(36.066335, -94.181306),
+                        new LatLng(36.065825, -94.181322),
+                        new LatLng(36.065803, -94.180526),
+                        new LatLng(36.066031, -94.18052),
+                        new LatLng(36.066031, -94.180308),
+                        new LatLng(36.066725, -94.180282)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":51,"lotId":2,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.068987, -94.180324),
+                        new LatLng(36.068993, -94.180629),
+                        new LatLng(36.068902, -94.180627),
+                        new LatLng(36.068898, -94.180702),
+                        new LatLng(36.066853, -94.180745),
+                        new LatLng(36.066847, -94.180299),
+                        new LatLng(36.067673, -94.180275),
+                        new LatLng(36.067675, -94.180297),
+                        new LatLng(36.068867, -94.180262),
+                        new LatLng(36.06887, -94.180329),
+                        new LatLng(36.068987, -94.180324)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":76,"lotId":8,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.061285, -94.181645),
+                        new LatLng(36.060802, -94.181667),
+                        new LatLng(36.060754, -94.180487),
+                        new LatLng(36.061251, -94.180492),
+                        new LatLng(36.06129, -94.18164),
+                        new LatLng(36.061285, -94.181645)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":79,"lotId":6,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.062537, -94.18045),
+                        new LatLng(36.062159, -94.180458),
+                        new LatLng(36.062185, -94.180943),
+                        new LatLng(36.062231, -94.180943),
+                        new LatLng(36.062231, -94.180994),
+                        new LatLng(36.062606, -94.180992),
+                        new LatLng(36.06261, -94.180927),
+                        new LatLng(36.062679, -94.180922),
+                        new LatLng(36.062686, -94.181043),
+                        new LatLng(36.063098, -94.181026),
+                        new LatLng(36.063091, -94.180967),
+                        new LatLng(36.063139, -94.18097),
+                        new LatLng(36.063115, -94.180452),
+                        new LatLng(36.06307, -94.180452),
+                        new LatLng(36.063067, -94.180369),
+                        new LatLng(36.06302, -94.180372),
+                        new LatLng(36.063018, -94.180442),
+                        new LatLng(36.062953, -94.180444),
+                        new LatLng(36.062948, -94.180376999999993),
+                        new LatLng(36.062712, -94.18038),
+                        new LatLng(36.062712, -94.180444),
+                        new LatLng(36.062537, -94.18045)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":91,"lotId":15,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.056901, -94.180104),
+                        new LatLng(36.056925, -94.179469),
+                        new LatLng(36.05697, -94.179472),
+                        new LatLng(36.056971, -94.179526),
+                        new LatLng(36.057058, -94.179522),
+                        new LatLng(36.057059, -94.17946),
+                        new LatLng(36.057939, -94.179441),
+                        new LatLng(36.05794, -94.179493),
+                        new LatLng(36.058099, -94.179491),
+                        new LatLng(36.058098, -94.179426),
+                        new LatLng(36.058445, -94.179421),
+                        new LatLng(36.058448, -94.179751),
+                        new LatLng(36.058384, -94.179755),
+                        new LatLng(36.058384, -94.179896),
+                        new LatLng(36.058448, -94.179899),
+                        new LatLng(36.058438, -94.180162),
+                        new LatLng(36.058369, -94.180159),
+                        new LatLng(36.058368, -94.18023),
+                        new LatLng(36.05809, -94.180242),
+                        new LatLng(36.058088, -94.180179),
+                        new LatLng(36.057881, -94.180184),
+                        new LatLng(36.057882, -94.180248),
+                        new LatLng(36.057041, -94.180273),
+                        new LatLng(36.057038, -94.180211),
+                        new LatLng(36.056946, -94.180106),
+                        new LatLng(36.056901, -94.180104)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":92,"lotId":17,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.059877, -94.179919),
+                        new LatLng(36.059879, -94.179275),
+                        new LatLng(36.060566, -94.179349),
+                        new LatLng(36.060572, -94.180091),
+                        new LatLng(36.06029, -94.180082),
+                        new LatLng(36.059931, -94.180074),
+                        new LatLng(36.059933, -94.18),
+                        new LatLng(36.059928, -94.179919),
+                        new LatLng(36.059877, -94.179919)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":96,"lotId":16,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.059938, -94.176784),
+                        new LatLng(36.059929, -94.176224),
+                        new LatLng(36.059978, -94.176084),
+                        new LatLng(36.059975, -94.176035),
+                        new LatLng(36.060234, -94.175992),
+                        new LatLng(36.060242, -94.176116),
+                        new LatLng(36.06037, -94.176103),
+                        new LatLng(36.060379, -94.1768),
+                        new LatLng(36.059951, -94.176794),
+                        new LatLng(36.059938, -94.176784)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":104,"lotId":19,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.061091, -94.179963),
+                        new LatLng(36.061447, -94.179509),
+                        new LatLng(36.061405, -94.179464),
+                        new LatLng(36.061405, -94.17941),
+                        new LatLng(36.061449, -94.179367),
+                        new LatLng(36.061108, -94.178978),
+                        new LatLng(36.061039, -94.179075),
+                        new LatLng(36.060913, -94.178933),
+                        new LatLng(36.06082, -94.179059),
+                        new LatLng(36.060829, -94.179657),
+                        new LatLng(36.060861, -94.179697),
+                        new LatLng(36.060824, -94.179753),
+                        new LatLng(36.061015, -94.179965),
+                        new LatLng(36.061048, -94.179922),
+                        new LatLng(36.061091, -94.179963)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":112,"lotId":11,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.059521, -94.183697),
+                        new LatLng(36.059537, -94.183657),
+                        new LatLng(36.059273, -94.183665),
+                        new LatLng(36.059246, -94.183717),
+                        new LatLng(36.059519, -94.183702),
+                        new LatLng(36.059521, -94.183697)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":197,"lotId":8,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.061327, -94.182501),
+                        new LatLng(36.061305, -94.18178),
+                        new LatLng(36.061014, -94.181801),
+                        new LatLng(36.061012, -94.181706),
+                        new LatLng(36.060965, -94.181708),
+                        new LatLng(36.060985, -94.182178),
+                        new LatLng(36.061097, -94.182174),
+                        new LatLng(36.061101, -94.182274),
+                        new LatLng(36.06099, -94.182284),
+                        new LatLng(36.060996, -94.182506),
+                        new LatLng(36.061327, -94.182501)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":222,"lotId":76,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.068112, -94.16446),
+                        new LatLng(36.068298, -94.164457),
+                        new LatLng(36.068304, -94.164806),
+                        new LatLng(36.068107, -94.164811),
+                        new LatLng(36.068112, -94.16446)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":225,"lotId":21,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.063094, -94.178205),
+                        new LatLng(36.063298, -94.178423),
+                        new LatLng(36.062454, -94.178453),
+                        new LatLng(36.062451, -94.17824),
+                        new LatLng(36.063098, -94.178202),
+                        new LatLng(36.063094, -94.178205),
+                        new LatLng(36.063094, -94.178205)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":226,"lotId":15,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.058421, -94.179264),
+                        new LatLng(36.058421, -94.179272),
+                        new LatLng(36.058420883135859, -94.17926400649246),
+                        new LatLng(36.05693, -94.179311),
+                        new LatLng(36.056968, -94.178303),
+                        new LatLng(36.057018, -94.178305),
+                        new LatLng(36.057016, -94.178356),
+                        new LatLng(36.057104, -94.178359),
+                        new LatLng(36.057104, -94.178295),
+                        new LatLng(36.057914, -94.178276),
+                        new LatLng(36.057913, -94.178339),
+                        new LatLng(36.058067, -94.178331),
+                        new LatLng(36.058068, -94.178265),
+                        new LatLng(36.058405, -94.178262),
+                        new LatLng(36.058406, -94.178398),
+                        new LatLng(36.058353, -94.178402),
+                        new LatLng(36.058355, -94.17852),
+                        new LatLng(36.058407, -94.178518),
+                        new LatLng(36.058414, -94.178807),
+                        new LatLng(36.058335, -94.178805),
+                        new LatLng(36.058338, -94.178932),
+                        new LatLng(36.058416, -94.17893),
+                        new LatLng(36.058420883135859, -94.17926400649246),
+                        new LatLng(36.058097, -94.179282),
+                        new LatLng(36.058091, -94.179219),
+                        new LatLng(36.057933, -94.17922),
+                        new LatLng(36.057935, -94.179286),
+                        new LatLng(36.057076, -94.179312),
+                        new LatLng(36.057074, -94.179256),
+                        new LatLng(36.056981, -94.179247),
+                        new LatLng(36.056974, -94.179316),
+                        new LatLng(36.05693, -94.179311)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":279,"lotId":15,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.056962, -94.178157),
+                        new LatLng(36.056984, -94.177278),
+                        new LatLng(36.057036, -94.177283),
+                        new LatLng(36.057057, -94.177111),
+                        new LatLng(36.057712, -94.177111),
+                        new LatLng(36.057717, -94.17716),
+                        new LatLng(36.057868, -94.177176),
+                        new LatLng(36.057946, -94.177208),
+                        new LatLng(36.05799, -94.177278),
+                        new LatLng(36.058011, -94.177331),
+                        new LatLng(36.058011, -94.177428),
+                        new LatLng(36.058011, -94.177514),
+                        new LatLng(36.058013, -94.177585),
+                        new LatLng(36.058335, -94.177578),
+                        new LatLng(36.05835, -94.177619),
+                        new LatLng(36.058355, -94.178167),
+                        new LatLng(36.056971, -94.178168),
+                        new LatLng(36.056962, -94.178157),
+                        new LatLng(36.056962, -94.178157),
+                        new LatLng(36.056962, -94.178157),
+                        new LatLng(36.056962, -94.178157)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":333,"lotId":77,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.05771, -94.183774),
+                        new LatLng(36.057618, -94.183777),
+                        new LatLng(36.057614, -94.183265),
+                        new LatLng(36.057701, -94.183262),
+                        new LatLng(36.057709, -94.183765),
+                        new LatLng(36.05771, -94.183774)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":379,"lotId":138,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.063144, -94.181133),
+                        new LatLng(36.063165, -94.18173),
+                        new LatLng(36.062247, -94.181774),
+                        new LatLng(36.062242, -94.181171),
+                        new LatLng(36.063136, -94.181131),
+                        new LatLng(36.063144, -94.181133)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":402,"lotId":5,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.064551, -94.180258),
+                        new LatLng(36.064429, -94.180258),
+                        new LatLng(36.064453, -94.180939),
+                        new LatLng(36.064006, -94.180914),
+                        new LatLng(36.064011, -94.181121),
+                        new LatLng(36.064033, -94.181339),
+                        new LatLng(36.064097, -94.181342),
+                        new LatLng(36.064122, -94.181419),
+                        new LatLng(36.064553, -94.18132),
+                        new LatLng(36.064539, -94.181219),
+                        new LatLng(36.064581, -94.181194),
+                        new LatLng(36.064555, -94.180276),
+                        new LatLng(36.064551, -94.180258),
+                        new LatLng(36.064551, -94.180258),
+                        new LatLng(36.064551, -94.180258),
+                        new LatLng(36.064551, -94.180258),
+                        new LatLng(36.064551, -94.180258)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":403,"lotId":5,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.063943, -94.180294),
+                        new LatLng(36.064429, -94.18026),
+                        new LatLng(36.064432, -94.180389),
+                        new LatLng(36.064098, -94.180411),
+                        new LatLng(36.064107, -94.180915),
+                        new LatLng(36.064055, -94.180925),
+                        new LatLng(36.064046, -94.180413),
+                        new LatLng(36.063948, -94.180412),
+                        new LatLng(36.063946, -94.180319),
+                        new LatLng(36.063943, -94.180294),
+                        new LatLng(36.063943, -94.180294)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":407,"lotId":103,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.063878, -94.180401),
+                        new LatLng(36.063657, -94.180408),
+                        new LatLng(36.063689, -94.181022),
+                        new LatLng(36.063246, -94.181048),
+                        new LatLng(36.063275, -94.181529),
+                        new LatLng(36.063905, -94.181465),
+                        new LatLng(36.063883, -94.180448),
+                        new LatLng(36.063878, -94.180401),
+                        new LatLng(36.063878, -94.180401),
+                        new LatLng(36.063878, -94.180401)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":408,"lotId":104,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.063345, -94.181886),
+                        new LatLng(36.064165, -94.181837),
+                        new LatLng(36.064308, -94.18217),
+                        new LatLng(36.063367, -94.18225),
+                        new LatLng(36.063337, -94.181929),
+                        new LatLng(36.063345, -94.181886)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":409,"lotId":102,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.064351, -94.181577),
+                        new LatLng(36.065336, -94.181478),
+                        new LatLng(36.065349, -94.181644),
+                        new LatLng(36.065276, -94.181722),
+                        new LatLng(36.064883, -94.181738),
+                        new LatLng(36.064905, -94.182349),
+                        new LatLng(36.064727, -94.18237),
+                        new LatLng(36.064501, -94.182221),
+                        new LatLng(36.064292, -94.18174),
+                        new LatLng(36.06436, -94.181577),
+                        new LatLng(36.064351, -94.181577)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":411,"lotId":149,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.064228, -94.181441),
+                        new LatLng(36.064557, -94.181396),
+                        new LatLng(36.064574, -94.181422),
+                        new LatLng(36.064241, -94.181484),
+                        new LatLng(36.064226, -94.181437),
+                        new LatLng(36.064228, -94.181441)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":422,"lotId":15,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.058445, -94.179423),
+                        new LatLng(36.058432, -94.178946),
+                        new LatLng(36.058328, -94.17893),
+                        new LatLng(36.058328, -94.178807),
+                        new LatLng(36.058423, -94.178801),
+                        new LatLng(36.058436, -94.178517),
+                        new LatLng(36.058345, -94.178528),
+                        new LatLng(36.058354, -94.178404),
+                        new LatLng(36.058415, -94.178383),
+                        new LatLng(36.058423, -94.17819),
+                        new LatLng(36.056966, -94.178184),
+                        new LatLng(36.056923, -94.179461),
+                        new LatLng(36.058423, -94.179423),
+                        new LatLng(36.058445, -94.179423)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":441,"lotId":149,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.065082, -94.181373),
+                        new LatLng(36.065084, -94.181404),
+                        new LatLng(36.064695, -94.181414),
+                        new LatLng(36.064694, -94.181391),
+                        new LatLng(36.065075, -94.181371),
+                        new LatLng(36.065082, -94.181373)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
+//{"id":442,"lotId":111,"zoneType":4,"color":"#195619","shape":"
+        polygon = mMap.addPolygon(new PolygonOptions()
+                .clickable(true)
+                .add(new LatLng(36.064959, -94.177972),
+                        new LatLng(36.064319, -94.177978),
+                        new LatLng(36.064317, -94.178023),
+                        new LatLng(36.064959, -94.178015),
+                        new LatLng(36.064959, -94.177991),
+                        new LatLng(36.064959, -94.177972)));
+
+
+
+        polygon.setTag("Lot");
+        stylePolygon(polygon, "Student");
+        StudentsLots.add(polygon);
+
     }
+
 
     public void addResidentReservedLotsPolygons()
     {
@@ -1920,13 +3169,18 @@ public class MapsActivity
                 break;
             case "Student":
                 // Apply a stroke pattern to render a line of dots and dashes, and define colors.
-                fillColor = COLOR_BLUE_ARGB;
+                fillColor = COLOR_GREEN_ARGB;
                 break;
             case "Resident":
                 fillColor = COLOR_RED_ARGB;
+                break;
+            case "Faculty":
+                fillColor = COLOR_YELLOW_ARGB;
+                break;
         }
         polygon.setStrokeWidth(POLYGON_STROKE_WIDTH_PX);
         polygon.setFillColor(fillColor);
+
     }
 
     /**
