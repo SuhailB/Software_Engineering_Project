@@ -137,12 +137,12 @@
                 android:buttonTint="@color/colorPrimary"
                 android:text="8:00PM - 6:59AM" />
 
-            <RadioButton
+            <!--<RadioButton
                 android:id="@+id/TimeZoneS4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorPrimary"
-                android:text="Current Time" />
+                android:text="Current Time" />-->
 
 
         </RadioGroup>
