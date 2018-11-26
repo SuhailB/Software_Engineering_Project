@@ -219,16 +219,19 @@ public class Configuration extends AppCompatActivity {
 
     public void PermitSelected()
     {
-        if (angeCheckedId == R.id.faculty) {
+        if (angeCheckedId == R.id.reserved) {
+            Toast.makeText(this, "Reserved", Toast.LENGTH_SHORT).show();
+            variables.PermitSetter(0);
+        }
+        else if (angeCheckedId == R.id.faculty) {
             Toast.makeText(this, "Faculty", Toast.LENGTH_SHORT).show();
             variables.PermitSetter(1);
-        } else if (angeCheckedId == R.id.resident) {
-            Toast.makeText(this, "Resident", Toast.LENGTH_SHORT).show();
-            variables.PermitSetter(2);
-        } else if (angeCheckedId == R.id.reserved) {
-            Toast.makeText(this, "Reserved", Toast.LENGTH_SHORT).show();
-            variables.PermitSetter(4);
-        } else if (angeCheckedId == R.id.student) {
+        }
+        else if (angeCheckedId == R.id.resident) {
+                Toast.makeText(this, "Resident", Toast.LENGTH_SHORT).show();
+                variables.PermitSetter(2);
+        }
+        else if (angeCheckedId == R.id.student) {
             variables.PermitSetter(3);
             Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
         }

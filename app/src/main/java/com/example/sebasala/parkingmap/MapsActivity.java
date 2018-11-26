@@ -69,6 +69,7 @@ public class MapsActivity
     private static final int FACULTY = 1;
     private static final int RESIDENT = 2;
     private static final int STUDENT = 3;
+
     private int permitType;
     private String timePeriod;
 
@@ -95,8 +96,9 @@ public class MapsActivity
         Intent intent = getIntent();
         permitType = intent.getIntExtra(Configuration.EXTRA_NUMBER,4);
         timePeriod = intent.getStringExtra(Configuration.EXTRA_TIME);
-        Toast.makeText(MapsActivity.this,timePeriod,Toast.LENGTH_LONG).show();
 
+        Toast.makeText(this,String.valueOf(permitType),Toast.LENGTH_LONG).show();
+        Toast.makeText(MapsActivity.this,timePeriod,Toast.LENGTH_LONG).show();
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -232,7 +234,7 @@ public class MapsActivity
         // Add a marker in Sydney and move the camera
         LatLng UARK = new LatLng(36.0685126, -94.1729845);
         // mMap.addMarker(new MarkerOptions().position(UARK).title("Univeristy of Arkansas"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UARK, 15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UARK, 14));
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
@@ -4736,6 +4738,11 @@ public class MapsActivity
         polygon.setFillColor(color);
 
         Toast.makeText(this, "Area type " + polygon.getTag().toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, Configuration.class));
     }
 
 }
