@@ -28,9 +28,9 @@ public class Configuration extends AppCompatActivity {
     Variables variables;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
-    String Date;
+    String Time;
     TextView dateTimeView;
-    Button timeButton;
+
 
 
     private boolean isChecking = true;
@@ -40,7 +40,7 @@ public class Configuration extends AppCompatActivity {
     //used in sending the ID for the button clicked
     //see openMaps() for more info
     public static final String EXTRA_NUMBER = "com.example.application.ParkingMap.EXTRA_NUMBER";
-
+    public static final String EXTRA_TIME = "com.example.application.ParkingMap.EXTRA_TIME";
     private static final String TAG = "ConfigActivity";
 
     @Override
@@ -57,19 +57,8 @@ public class Configuration extends AppCompatActivity {
     {
 
         dateTimeView = (TextView) findViewById(R.id.seeTime);
-        timeButton = (Button) findViewById(R.id.clickTime);
 
-        timeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calendar = Calendar.getInstance();
-                simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-                Date = simpleDateFormat.format(calendar.getTime());
-                if(Date.compareTo("17:00:00") > 0)
-                    dateTimeView.setText(Date);
 
-            }
-        });
 
         radioGroupAnge = (RadioGroup) findViewById(R.id.Permit);
         radioGroupLionel = (RadioGroup) findViewById(R.id.Time);
@@ -140,7 +129,8 @@ public class Configuration extends AppCompatActivity {
         int hey = 0;
         hey = variables.PermitGetter();
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra(EXTRA_NUMBER,variables.PermitGetter()); //this adds buttonId to intent which sends it to mapsActivity
+        intent.putExtra(EXTRA_NUMBER,variables.PermitGetter());//this adds buttonId to intent which sends it to mapsActivity
+        intent.putExtra(EXTRA_TIME,variables.Timegetter());
         startActivity(intent);
     }
 
@@ -162,22 +152,32 @@ public class Configuration extends AppCompatActivity {
 
     }
 
-    public void TimeSelected()
-    {
+    public void TimeSelected() {
         if (lionelCheckId == R.id.SeventoFive) {
+            variables.Timesetter(1);
             Toast.makeText(this, "7:00am - 4:59pm", Toast.LENGTH_LONG).show();
-            variables.PermitSetter(1);
         } else if (lionelCheckId == R.id.FivetoEight) {
-            variables.PermitSetter(2);
+            variables.Timesetter(2);
             Toast.makeText(this, "5:00pm - 7:59pm", Toast.LENGTH_LONG).show();
         } else if (lionelCheckId == R.id.EighttoSeven) {
-            variables.PermitSetter(3);
+            variables.Timesetter(3);
             Toast.makeText(this, "8:00pm - 7:00am", Toast.LENGTH_SHORT).show();
-        }else if (lionelCheckId == R.id.currentTime) {
-            variables.PermitSetter(4);
-            Toast.makeText(this, "Current time", Toast.LENGTH_SHORT).show();
+        } else if (lionelCheckId == R.id.currentTime) {
+            calendar = Calendar.getInstance();
+            simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+            Time = simpleDateFormat.format(calendar.getTime());
+            if (Time.compareTo("07:00:00") >= 0 && Time.compareTo("16:59:59") <= 0) {
+                Toast.makeText(this, Time, Toast.LENGTH_SHORT).show();
+                variables.Timesetter(1);
+            } else if (Time.compareTo("17:00:00") >= 0 && Time.compareTo("19:59:59") <= 0) {
+                Toast.makeText(this, Time, Toast.LENGTH_SHORT).show();
+                variables.Timesetter(2);
+            } else if (Time.compareTo("20:00:00") >= 0 && Time.compareTo("06:59:59") <= 0) {
+                Toast.makeText(this, Time, Toast.LENGTH_SHORT).show();
+                variables.Timesetter(3);
+            }
+            dateTimeView.setText(Time);
         }
-
     }
 
     public void seeTime(View view) {
