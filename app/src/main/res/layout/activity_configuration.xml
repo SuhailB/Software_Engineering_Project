@@ -66,11 +66,58 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="253dp"
-        android:text="What time do you want to park"
+        android:text="@string/what_time_do_you_want_to_park"
         android:textSize="20sp"
         android:layout_alignParentLeft="true" />
 
-    <RadioGroup
+    <CheckBox
+        android:id="@+id/SevenToFive"
+        android:text="@string/_7am_5pm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="208dp"
+        android:layout_alignParentLeft="true" />
+
+    <CheckBox
+        android:id="@+id/FivetoEight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/SevenToFive"
+        android:layout_marginTop="-208dp"
+        android:text="@string/_5pm_8pm"
+        android:layout_alignParentLeft="true" />
+
+    <CheckBox
+        android:id="@+id/EighttoThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ThreetoSeven"
+        android:text="@string/_8pm_3am"
+        android:layout_alignParentLeft="true" />
+
+    <CheckBox
+        android:id="@+id/ThreetoSeven"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/FivetoEight"
+        android:text="@string/_3am_7am"
+        android:layout_alignParentLeft="true" />
+
+    <CheckBox
+        android:id="@+id/currentTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/LoadParkingSpots"
+        android:layout_alignParentStart="true"
+        android:text="@string/current_time"
+        android:layout_alignParentLeft="true" />
+
+    <!--<RadioGroup
         android:id="@+id/Time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,7 +149,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/current_time" />
-    </RadioGroup>
+    </RadioGroup>-->
 
     <Button
         android:id="@+id/LoadParkingSpots"
@@ -111,20 +158,19 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="30dp"
-        android:text="Load Parking Spots"
+        android:text="@string/load_parking_spots"
         android:layout_alignParentRight="true" />
 
     <TextView
         android:id="@+id/seeTime"
         android:layout_width="105dp"
         android:layout_height="33dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="58dp"
-        android:layout_marginStart="29dp"
-        android:hint="Date and Time"
+        android:layout_alignTop="@+id/LoadParkingSpots"
+        android:layout_marginStart="22dp"
+        android:hint="@string/date_and_time"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="29dp" />
+        android:layout_marginLeft="22dp" />
 
 
 
