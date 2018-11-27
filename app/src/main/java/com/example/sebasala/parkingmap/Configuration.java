@@ -1,6 +1,8 @@
 package com.example.sebasala.parkingmap;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,6 +69,10 @@ public class Configuration extends AppCompatActivity {
         radioGroupAnge = (RadioGroup) findViewById(R.id.Permit);
        // radioGroupLionel = (RadioGroup) findViewById(R.id.Time);
         button = (Button) findViewById(R.id.LoadParkingSpots);
+        button.getBackground().setColorFilter(0xff9D2235, PorterDuff.Mode.MULTIPLY);
+        button.setTextColor(Color.parseColor("white"));
+
+        //button.setBackgroundColor(0xff9D223);
         SevenToFive = (CheckBox) findViewById(R.id.SevenToFive);
         FiveToEight = (CheckBox) findViewById(R.id.FivetoEight);
         EightTOThree = (CheckBox) findViewById(R.id.EighttoThree);
@@ -215,6 +221,9 @@ public class Configuration extends AppCompatActivity {
         intent.putExtra(EXTRA_NUMBER,variables.PermitGetter());//this adds buttonId to intent which sends it to mapsActivity
         intent.putExtra(EXTRA_TIME,variables.Timegetter());
         startActivity(intent);
+        variables.TimeReset();
+        Toast.makeText(Configuration.this,"Time Reset Done!"+variables.Timegetter(),Toast.LENGTH_LONG).show();
+
     }
 
     public void PermitSelected()
@@ -234,6 +243,10 @@ public class Configuration extends AppCompatActivity {
         else if (angeCheckedId == R.id.student) {
             variables.PermitSetter(3);
             Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
+        }
+        else if (angeCheckedId == R.id.noPermit){
+            variables.PermitSetter(4);
+            Toast.makeText(this,"no permit",Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -268,6 +281,7 @@ public class Configuration extends AppCompatActivity {
 
     public void seeTime(View view) {
     }
+
 }
 
 class Variables
@@ -275,7 +289,7 @@ class Variables
     private int IDselected;
     //private int TimeSelected;
     private String TimeSelected;
-    Variables() { IDselected = 0; TimeSelected ="0000";}
+    Variables() { IDselected = 4; TimeSelected ="0000";}
     void PermitSetter(int xx) { IDselected = xx; }
     int PermitGetter() { return IDselected; }
     void Timesetter(int xx)
@@ -284,4 +298,8 @@ class Variables
       TimeSelected = String.valueOf(timeset);
     }
     String Timegetter(){ return TimeSelected; }
+    void TimeReset()
+    {
+        TimeSelected = "0000";
+    }
 }

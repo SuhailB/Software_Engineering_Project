@@ -4740,9 +4740,6 @@ public class MapsActivity
         Toast.makeText(this, "Area type " + polygon.getTag().toString(), Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this, Configuration.class));
-    }
+
 
 }

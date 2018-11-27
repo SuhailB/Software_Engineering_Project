@@ -28,5 +28,6 @@
     <string name="_8pm_3am">8pm - 3am</string>
     <string name="_3am_7am">3am - 7am</string>
     <string name="load_parking_spots">Load Parking Spots</string>
+    <string name="no_permit">No permit</string>
 
 </resources>
