@@ -60,6 +60,7 @@ public class MapsActivity
     private static final int COLOR_YELLOW_ARGB = 0xffFFFF00;
     private static final int COLOR_RED_ARGB = 0xffcc0000;
     private static final int COLOR_GREEN_ARGB = 0xff195619;
+    private static final int COLOR_PINK_ARGB = 0xffff69b4;
 
 
 
@@ -96,9 +97,9 @@ public class MapsActivity
         Intent intent = getIntent();
         permitType = intent.getIntExtra(Configuration.EXTRA_NUMBER,4);
         timePeriod = intent.getStringExtra(Configuration.EXTRA_TIME);
-
-        Toast.makeText(this,String.valueOf(permitType),Toast.LENGTH_LONG).show();
-        Toast.makeText(MapsActivity.this,timePeriod,Toast.LENGTH_LONG).show();
+//
+//        Toast.makeText(this,String.valueOf(permitType),Toast.LENGTH_LONG).show();
+//        Toast.makeText(MapsActivity.this,timePeriod,Toast.LENGTH_LONG).show();
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -170,22 +171,27 @@ public class MapsActivity
             case "1000": break;
             case "1100":
             {
-                if(permitAvailable) Permit5_8_Free8_7(type);
-                addFree5_7Polygons(type);
-                NoOvernight(type);
+                if(permitAvailable) {
+                    Permit5_8_Free8_7(type);
+                    addFree5_7Polygons(type);
+                    NoOvernight(type);
+                }
             } break;
             case "1110":
             {
-                if(permitAvailable) Permit5_8_Free8_7(type);
-                addFree5_7Polygons(type);
-                addFree8_7Polygons(type);
-                NoOvernight(type);
+                if(permitAvailable) {
+                    Permit5_8_Free8_7(type);
+                    addFree5_7Polygons(type);
+                    addFree8_7Polygons(type);
+                    NoOvernight(type);
+                }
             } break;
             case "1111":
             {
-                if(permitAvailable) Permit5_8_Free8_7(type);
-                addFree5_7Polygons(type);
-                addFree8_7Polygons(type);
+                if(permitAvailable) {
+                    Permit5_8_Free8_7(type);
+                    addFree5_7Polygons(type);
+                    addFree8_7Polygons(type);}
             } break;
             ////////////////////////////////////////////////
             case "0100":
@@ -208,14 +214,14 @@ public class MapsActivity
             ////////////////////////////////////////////////
             case "0010":
             {
-                if(permitAvailable) Permit5_8_Free8_7(type);
+                Permit5_8_Free8_7(type);
                 addFree5_7Polygons(type);
                 addFree8_7Polygons(type);
                 NoOvernight(type);
             }
             case "0011":
             {
-                if(permitAvailable) Permit5_8_Free8_7(type);
+                Permit5_8_Free8_7(type);
                 addFree5_7Polygons(type);
                 addFree8_7Polygons(type);
                 NoOvernight(type);
@@ -223,7 +229,7 @@ public class MapsActivity
             /////////////////////////////////////////////////
             case "0001":
             {
-                if(permitAvailable) Permit5_8_Free8_7(type);
+                Permit5_8_Free8_7(type);
                 addFree5_7Polygons(type);
                 addFree8_7Polygons(type);
             }
@@ -242,17 +248,6 @@ public class MapsActivity
 
     }
 
-    public void PolygonGeneral(String Type)
-    {
-        if (Type.contains("Faculty"))
-            addFacultyStaffLotsPolygons();
-        else if(Type.contains("Resident"))
-            addResidentReservedLotsPolygons();
-        else if(Type.contains("Reserved"))
-            addReservedLotsPolygons();
-        else if(Type.contains("Student"))
-            addStudentLotsPolygons();
-    }
     public void addReservedLotsPolygons()
     {
         Polygon polygon = mMap.addPolygon(new PolygonOptions()
@@ -4687,7 +4682,7 @@ public class MapsActivity
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
+      //  Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
 //        Toast.makeText(this, "ArrayList size is:\n" + ReservedLots.size(), Toast.LENGTH_LONG).show();
 //        Toast.makeText(this, "ArrayList 0 tag is: " + ReservedLots.get(0).getTag(), Toast.LENGTH_LONG).show();
 //        Toast.makeText(this, "ArrayList 1 tag is: " + ReservedLots.get(1).getTag(), Toast.LENGTH_LONG).show();
@@ -4695,7 +4690,7 @@ public class MapsActivity
 
     @Override
     public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
@@ -4718,6 +4713,9 @@ public class MapsActivity
             case "Student":
                 fillColor = COLOR_GREEN_ARGB;
                 break;
+            case "NoPermit":
+                fillColor = COLOR_PINK_ARGB;
+                break;
             default:
                 fillColor = COLOR_WHITE_ARGB;
                 break;
@@ -4737,7 +4735,7 @@ public class MapsActivity
         color = polygon.getFillColor() ^ 0x00ffffff;
         polygon.setFillColor(color);
 
-        Toast.makeText(this, "Area type " + polygon.getTag().toString(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "Area type " + polygon.getTag().toString(), Toast.LENGTH_SHORT).show();
     }
 
 

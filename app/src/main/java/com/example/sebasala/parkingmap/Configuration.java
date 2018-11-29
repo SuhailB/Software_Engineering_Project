@@ -88,19 +88,19 @@ public class Configuration extends AppCompatActivity {
                     simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
                     Time = simpleDateFormat.format(calendar.getTime());
                     if (Time.compareTo("07:00:00") >= 0 && Time.compareTo("16:59:59") <= 0) {
-                        Toast.makeText(Configuration.this,"7am - 5pm",Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(Configuration.this,"7am - 5pm",Toast.LENGTH_LONG).show();
                         variables.Timesetter(0);
                     } else if (Time.compareTo("17:00:00") > 0 && Time.compareTo("19:59:59") < 0) {
-                        Toast.makeText(Configuration.this,"5pm - 8pm",Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(Configuration.this,"5pm - 8pm",Toast.LENGTH_SHORT).show();
                         variables.Timesetter(1);
                     } else if (Time.compareTo("20:00:00") >= 0 && Time.compareTo("23:59:59") <= 0) {
-                        Toast.makeText(Configuration.this,"8pm - 3am",Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(Configuration.this,"8pm - 3am",Toast.LENGTH_LONG).show();
                         variables.Timesetter(2);
                     }else if(Time.compareTo("00:00:00") >= 0 && Time.compareTo("02:59:59") <= 0){
-                        Toast.makeText(Configuration.this,"8pm - 3am",Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(Configuration.this,"8pm - 3am",Toast.LENGTH_LONG).show();
                         variables.Timesetter(2);
                     }else if (Time.compareTo("03:00:00") >= 0 && Time.compareTo("06:59:59") <= 0) {
-                        Toast.makeText(Configuration.this,"3am - 7pm",Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(Configuration.this,"3am - 7pm",Toast.LENGTH_LONG).show();
                         variables.Timesetter(3);
                     }
                     dateTimeView.setText(Time);
@@ -114,8 +114,12 @@ public class Configuration extends AppCompatActivity {
             public void onClick(View view) {
                 if(((CheckBox)view).isChecked())
                 {
-                   Toast.makeText(Configuration.this,"7am - 5pm",Toast.LENGTH_LONG).show();
+                  // Toast.makeText(Configuration.this,"7am - 5pm",Toast.LENGTH_LONG).show();
                    variables.Timesetter(0);
+                }
+                else if(!((CheckBox)view).isChecked())
+                {
+                    variables.TimeResetter(0);
                 }
             }
         });
@@ -125,8 +129,13 @@ public class Configuration extends AppCompatActivity {
             public void onClick(View view) {
                 if(((CheckBox)view).isChecked())
                 {
+
                     variables.Timesetter(1);
-                    Toast.makeText(Configuration.this,"5pm - 8pm",Toast.LENGTH_LONG).show();
+                   // Toast.makeText(Configuration.this,"5pm - 8pm",Toast.LENGTH_LONG).show();
+                }
+                else if(!((CheckBox)view).isChecked())
+                {
+                    variables.TimeResetter(1);
                 }
             }
         });
@@ -137,7 +146,11 @@ public class Configuration extends AppCompatActivity {
                 if(((CheckBox)view).isChecked())
                 {
                     variables.Timesetter(2);
-                    Toast.makeText(Configuration.this,"8pm - 3am",Toast.LENGTH_LONG).show();
+                   // Toast.makeText(Configuration.this,"8pm - 3am",Toast.LENGTH_LONG).show();
+                }
+                else if(!((CheckBox)view).isChecked())
+                {
+                    variables.TimeResetter(2);
                 }
             }
         });
@@ -148,7 +161,11 @@ public class Configuration extends AppCompatActivity {
                 if(((CheckBox)view).isChecked())
                 {
                     variables.Timesetter(3);
-                    Toast.makeText(Configuration.this,"3am - 7am",Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(Configuration.this,"3am - 7am",Toast.LENGTH_LONG).show();
+                }
+                else if(!((CheckBox)view).isChecked())
+                {
+                    variables.TimeResetter(3);
                 }
             }
         });
@@ -210,7 +227,7 @@ public class Configuration extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "You cannot make map requests", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "You cannot make map requests", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
@@ -222,31 +239,36 @@ public class Configuration extends AppCompatActivity {
         intent.putExtra(EXTRA_TIME,variables.Timegetter());
         startActivity(intent);
         variables.TimeReset();
-        Toast.makeText(Configuration.this,"Time Reset Done!"+variables.Timegetter(),Toast.LENGTH_LONG).show();
+        SevenToFive.setChecked(false);
+        FiveToEight.setChecked(false);
+        EightTOThree.setChecked(false);
+        ThreeToSeven.setChecked(false);
+        CurrentTime.setChecked(false);
+      //  Toast.makeText(Configuration.this,"Time Reset Done!"+variables.Timegetter(),Toast.LENGTH_LONG).show();
 
     }
 
     public void PermitSelected()
     {
         if (angeCheckedId == R.id.reserved) {
-            Toast.makeText(this, "Reserved", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Reserved", Toast.LENGTH_SHORT).show();
             variables.PermitSetter(0);
         }
         else if (angeCheckedId == R.id.faculty) {
-            Toast.makeText(this, "Faculty", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Faculty", Toast.LENGTH_SHORT).show();
             variables.PermitSetter(1);
         }
         else if (angeCheckedId == R.id.resident) {
-                Toast.makeText(this, "Resident", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(this, "Resident", Toast.LENGTH_SHORT).show();
                 variables.PermitSetter(2);
         }
         else if (angeCheckedId == R.id.student) {
             variables.PermitSetter(3);
-            Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "Student", Toast.LENGTH_SHORT).show();
         }
         else if (angeCheckedId == R.id.noPermit){
             variables.PermitSetter(4);
-            Toast.makeText(this,"no permit",Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this,"no permit",Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -298,6 +320,13 @@ class Variables
       TimeSelected = String.valueOf(timeset);
     }
     String Timegetter(){ return TimeSelected; }
+
+    void TimeResetter(int xx)
+    {
+        char[] timeset = TimeSelected.toCharArray();
+        timeset[xx] = '0';
+        TimeSelected = String.valueOf(timeset);
+    }
     void TimeReset()
     {
         TimeSelected = "0000";
